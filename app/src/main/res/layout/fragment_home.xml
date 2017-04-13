@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -25,7 +24,7 @@
             tl:tl_indicator_height="3dp"
             tl:tl_tab_padding="10dp"
             tl:tl_tab_space_equal="true"
-            tl:tl_textBold="BOTH"
+            tl:tl_textBold="SELECT"
             tl:tl_textSelectColor="#ff7800"
             tl:tl_textUnselectColor="#707070"
 

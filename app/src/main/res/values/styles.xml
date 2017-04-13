@@ -108,4 +108,15 @@
         <!--&lt;!&ndash; 加载网络数据时覆盖在BGABanner最上层的占位图 &ndash;&gt;-->
         <!--<item name="banner_placeholderDrawable">@drawable/holder</item>-->
     </style>
+
+    <!--TitleBar的Img_Icon样式-->
+    <style name="title_icon_style">
+        <item name="android:layout_width">@dimen/px_60</item>
+        <item name="android:layout_height">@dimen/px_60</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_marginRight">@dimen/px_20</item>
+    </style>
+
 </resources>

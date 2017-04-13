@@ -29,18 +29,17 @@ import butterknife.Unbinder;
  *  修改时间：2016/11/30 上午9:56
  **/
 public class MainActivity extends  AppCompatActivity implements BaseView{
+
+    @BindView(R.id.mainTabBar)
+    NavigateTabBar mNavigateTabBar;
+
     private static final String TAG_PAGE_HOME = "首页";
     private static final String TAG_PAGE_LIVE= "直播";
     private static final String TAG_PAGE_VIDEO = "关注";
     private static final String TAG_PAGE_FOLLOW = "发现";
     private static final String TAG_PAGE_USER = "我的";
     protected Unbinder unbinder;
-    //    退出时间
     private long exitTime = 0;
-
-    @BindView(R.id.mainTabBar)
-    NavigateTabBar mNavigateTabBar;
-    NavigateTabBar.ViewHolder mHolder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,55 +58,41 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
         mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable
                 .user_selected, TAG_PAGE_USER));
         mNavigateTabBar.setTabSelectListener(holder -> {
-//                Toast.makeText(MainActivity.this, "信息为:"+holder.tag, Toast.LENGTH_SHORT).show();
             switch (holder.tag) {
-//                    首页
                 case TAG_PAGE_HOME:
                     mNavigateTabBar.showFragment(holder);
                     break;
-//                    直播
                 case TAG_PAGE_LIVE:
-
                     mNavigateTabBar.showFragment(holder);
                     break;
-//                    视频
                 case TAG_PAGE_VIDEO:
                     mNavigateTabBar.showFragment(holder);
                     break;
-//                    关注
                 case TAG_PAGE_FOLLOW:
                     mNavigateTabBar.showFragment(holder);
                     break;
-//                    我的
                 case TAG_PAGE_USER:
                     if(mNavigateTabBar!=null)
                     mNavigateTabBar.showFragment(holder);
                     break;
             }
         });
-//        // 获取所有权限
-//        PermissionUtil.requestAllPermission(new PermissionUtil.RequestPermission() {
-//            @Override
-//            public void onRequestPermissionSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onRequestPermissionFailed() {
-//
-//            }
-//        }, new RxPermissions(MainActivity.this),this);
-    }
+        /*// 获取所有权限
+        PermissionUtil.requestAllPermission(new PermissionUtil.RequestPermission() {
+            @Override
+            public void onRequestPermissionSuccess() {
 
-    @Override
-    protected void onRestart() {
+            }
 
-        super.onRestart();
+            @Override
+            public void onRequestPermissionFailed() {
+
+            }
+        }, new RxPermissions(MainActivity.this),this);*/
     }
 
     /**
      * 拦截返回键，要求点击两次返回键才退出应用
-     *
      * @param keyCode 按键代码
      * @param event   点击事件
      * @return 是否处理本次事件
@@ -142,7 +127,6 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
 
     /**
      * 保存数据状态
-     *
      * @param outState
      */
     @Override

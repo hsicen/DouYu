@@ -12,6 +12,7 @@
     <color name="background">#ffffff</color>
     <color name="btn_ok_pressed">#ff4248</color>
     <color name="btn_ok_unpressed">#99ff4248</color>
+    <color name="base_line">#34707070</color>
 
     <color name="actionsheet_gray">#8F8F8F</color>
     <color name="actionsheet_text">#555555</color>

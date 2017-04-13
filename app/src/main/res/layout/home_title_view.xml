@@ -1,52 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--自定义TitleBar布局-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120px"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:layout_height="@dimen/px_120"
+    android:background="@color/colorPrimary">
 
     <ImageView
-        android:layout_width="200px"
-        android:layout_height="100px"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="25px"
+        android:layout_width="@dimen/px_200"
+        android:layout_height="@dimen/px_100"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="30px"
         android:src="@drawable/logo_icon" />
 
-    <ImageView
-        android:id="@+id/img_search"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="35px"
-        android:src="@drawable/img_search" />
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/px_19"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/et_hint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/title_search_shap"
+            android:gravity="center_vertical"
+            android:hint=""
+            android:paddingLeft="@dimen/dp_32"
+            android:textSize="@dimen/dp_12" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="@dimen/px_35"
+            android:layout_height="@dimen/px_35"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:src="@drawable/home_search_icon" />
+
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="@dimen/px_40"
+            android:layout_height="@dimen/px_40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_6"
+            android:src="@drawable/home_scan_icon" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_toLeftOf="@id/iv_scan"
+            android:background="@color/base_line" />
+
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/img_scanner"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="60px"
-        android:layout_toLeftOf="@+id/img_search"
-        android:src="@drawable/img_scanner" />
+        android:id="@+id/iv_game"
+        style="@style/title_icon_style"
+        android:layout_width="@dimen/px_75"
+        android:layout_marginLeft="@dimen/px_15"
+        android:layout_marginRight="@dimen/px_35"
+        android:src="@drawable/home_gamecenter_icon_with_dot" />
 
     <ImageView
-        android:id="@+id/img_history"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="60px"
-        android:layout_toLeftOf="@+id/img_scanner"
-        android:src="@drawable/img_history" />
+        android:id="@+id/iv_history"
+        style="@style/title_icon_style"
+        android:layout_marginTop="@dimen/dp_1"
+        android:src="@drawable/image_history_normal" />
 
-    <ImageView
-        android:id="@+id/img_message"
-        android:layout_width="60px"
-        android:layout_height="60px"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="60px"
-        android:layout_toLeftOf="@+id/img_history"
-        android:src="@drawable/img_message" />
-
-</com.zhy.autolayout.AutoRelativeLayout>
+</LinearLayout>
