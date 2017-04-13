@@ -137,7 +137,7 @@ public class HomeRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.ViewH
      * @param position
      */
     private void bindAllColumnHolder(ColumnViewHolder holder, int position) {
-        holder.img_column_icon.setImageResource(R.mipmap.icon_column);
+        holder.img_column_icon.setImageResource(R.drawable.icon_column);
         holder.tv_column_name.setText(mHomeRecommendHotCate.get(position - 2).getTag_name());
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         mAllColumnAdapter = new HomeRecommendAllColumnAdapter(holder.rv_column_list.getContext(), mHomeRecommendHotCate.get(position - 2).getRoom_list());
@@ -163,7 +163,7 @@ public class HomeRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.ViewH
      */
     private void bindFaceScoreColumnHolder(ColumnViewHolder holder, int position, boolean isItem) {
 
-        holder.img_column_icon.setImageResource(R.mipmap.icon_reco_mobile);
+        holder.img_column_icon.setImageResource(R.drawable.icon_reco_mobile);
         holder.tv_column_name.setText("颜值");
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         holder.rv_column_list.setAdapter(mFaceScoreColumnAdapter);
@@ -219,7 +219,7 @@ public class HomeRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.ViewH
      * @param position
      */
     private void bindColumnHolder(ColumnViewHolder holder, int position) {
-        holder.img_column_icon.setImageResource(R.mipmap.reco_game_txt_icon);
+        holder.img_column_icon.setImageResource(R.drawable.reco_game_txt_icon);
         holder.tv_column_name.setText("最热");
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         mHotColumnAdapter = new HomeRecommendHotColumnAdapter(holder.rv_column_list.getContext(), mHomeHotColumn);

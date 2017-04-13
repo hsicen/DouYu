@@ -27,5 +27,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mainTabBar"
-        android:background="@mipmap/comui_bar_top_shadow"/>
+        android:background="@drawable/comui_bar_top_shadow"/>
 </com.zhy.autolayout.AutoRelativeLayout>

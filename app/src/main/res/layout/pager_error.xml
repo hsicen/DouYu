@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:src="@mipmap/im_loading_fail" />
+            android:src="@drawable/im_loading_fail" />
 
         <TextView
             android:id="@+id/tv_msg_error"

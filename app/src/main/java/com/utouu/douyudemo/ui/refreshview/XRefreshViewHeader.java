@@ -141,11 +141,11 @@ public class XRefreshViewHeader extends LinearLayout implements IHeaderCallBack 
         if(success)
         {
             mHintTextView.setText(R.string.xrefreshview_header_hint_loaded);
-            mOkImageView.setBackgroundResource(R.mipmap.xrefresh_success);
+            mOkImageView.setBackgroundResource(R.drawable.xrefresh_success);
         }else
         {
             mHintTextView.setText(R.string.xrefreshview_header_hint_loaded_fail);
-            mOkImageView.setBackgroundResource(R.mipmap.xrefresh_fail);
+            mOkImageView.setBackgroundResource(R.drawable.xrefresh_fail);
 
         }
         mHeaderTimeTextView.setVisibility(View.GONE);

@@ -264,9 +264,9 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
                 imgView.setLayoutParams(new ViewGroup.LayoutParams(5, 5));
 //            默认设置
                 if (i == 0) {
-                    imgView.setBackgroundResource(R.mipmap.page__selected_indicator);
+                    imgView.setBackgroundResource(R.drawable.page__selected_indicator);
                 } else {
-                    imgView.setBackgroundResource(R.mipmap.page__normal_indicator);
+                    imgView.setBackgroundResource(R.drawable.page__normal_indicator);
                 }
                 mIvpoints[i] = imgView;
 //            设置边距
@@ -296,9 +296,9 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
     public void onPageSelected(int position) {
         for (int i = 0; i < mIvpoints.length; i++) {
             if (i == position) {
-                mIvpoints[i].setBackgroundResource(R.mipmap.page__selected_indicator);
+                mIvpoints[i].setBackgroundResource(R.drawable.page__selected_indicator);
             } else {
-                mIvpoints[i].setBackgroundResource(R.mipmap.page__normal_indicator);
+                mIvpoints[i].setBackgroundResource(R.drawable.page__normal_indicator);
             }
         }
     }

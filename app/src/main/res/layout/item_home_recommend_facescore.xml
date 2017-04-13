@@ -8,10 +8,10 @@
         android:id="@+id/img_item_gridview"
         android:layout_width="@dimen/wh200.0dimens200.0dp"
         android:layout_height="@dimen/wh250.0dimens250.0dp"
-        fresco:placeholderImage="@mipmap/image_loading_1_1"
+        fresco:placeholderImage="@drawable/image_loading_1_1"
         fresco:actualImageScaleType="centerCrop"
         fresco:placeholderImageScaleType="centerCrop"
-        android:src="@mipmap/image_loading_1_1"
+        android:src="@drawable/image_loading_1_1"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="@dimen/wh10.0dimens10.0dp"
        fresco:roundedCornerRadius="6dip"
@@ -20,7 +20,7 @@
         android:id="@+id/img_nickname"
         android:layout_width="@dimen/wh12.0dimens12.0dp"
         android:layout_height="@dimen/wh12.0dimens12.0dp"
-        android:src="@mipmap/history_icon_author"
+        android:src="@drawable/history_icon_author"
         android:layout_below="@id/img_item_gridview"
         android:layout_marginLeft="@dimen/wh3.0dimens3.0dp"
         android:layout_marginRight="@dimen/wh3.0dimens3.0dp"
@@ -54,7 +54,7 @@
     <ImageView
         android:layout_width="@dimen/wh12.0dimens12.0dp"
         android:layout_height="@dimen/wh12.0dimens12.0dp"
-        android:src="@mipmap/icon_locate"
+        android:src="@drawable/icon_locate"
         android:layout_marginTop="@dimen/wh3.0dimens3.0dp"
         android:layout_below="@id/img_item_gridview"
         android:layout_toLeftOf="@id/tv_facescore_city"
@@ -91,7 +91,7 @@
             android:layout_marginRight="@dimen/wh3.0dimens3.0dp"
             android:layout_marginTop="@dimen/wh3.0dimens3.0dp"
             android:layout_toLeftOf="@id/tv_online_num"
-            android:src="@mipmap/home_reco_online_num_icon" />
+            android:src="@drawable/home_reco_online_num_icon" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="@dimen/wh60.0dimens60.0dp"

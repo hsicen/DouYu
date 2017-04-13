@@ -10,7 +10,7 @@
         android:id="@+id/img_item_gridview"
         android:layout_width="@dimen/wh45.0dimens45.0dp"
         android:layout_height="@dimen/wh45.0dimens45.0dp"
-        fresco:placeholderImage="@mipmap/often_loading_fail_icon"
+        fresco:placeholderImage="@drawable/often_loading_fail_icon"
         fresco:actualImageScaleType="centerCrop"
         fresco:placeholderImageScaleType="centerCrop"
         fresco:roundAsCircle="true"

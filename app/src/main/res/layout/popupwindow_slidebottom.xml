@@ -22,7 +22,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
                 android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
-                android:src="@mipmap/error" />
+                android:src="@drawable/error" />
 
             <TextView
                 android:id="@+id/tv_buy_num"
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@mipmap/jian" />
+                    android:src="@drawable/jian" />
                 <LinearLayout
                     android:gravity="center"
                     android:layout_weight="1"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@mipmap/jia" />
+                    android:src="@drawable/jia" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_begin_award"

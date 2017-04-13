@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="@dimen/wh10.0dimens10.0dp"
         fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@mipmap/image_loading_5_3"
+        fresco:placeholderImage="@drawable/image_loading_5_3"
         fresco:placeholderImageScaleType="centerCrop"
         fresco:roundedCornerRadius="6dip" />
 
@@ -41,7 +41,7 @@
 
         android:layout_marginRight="@dimen/wh5.0dimens5.0dp"
         android:layout_marginTop="@dimen/wh5.0dimens5.0dp"
-        android:src="@mipmap/home_reco_host_name_icon" />
+        android:src="@drawable/home_reco_host_name_icon" />
 
     <TextView
         android:id="@+id/tv_nickname"
@@ -81,7 +81,7 @@
 
         android:layout_marginRight="@dimen/wh5.0dimens5.0dp"
         android:layout_marginTop="@dimen/wh7.0dimens7.0dp"
-        android:src="@mipmap/icon_play_times" />
+        android:src="@drawable/icon_play_times" />
 
     <FrameLayout
         android:layout_width="match_parent"

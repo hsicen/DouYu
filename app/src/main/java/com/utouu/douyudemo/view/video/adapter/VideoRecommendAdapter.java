@@ -137,7 +137,7 @@ public class VideoRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.View
      * @param position
      */
     private void bindAllColumnHolder(ColumnViewHolder holder, int position) {
-        holder.img_column_icon.setImageResource(R.mipmap.icon_column);
+        holder.img_column_icon.setImageResource(R.drawable.icon_column);
         holder.tv_column_name.setText(mVideoRecommendHotCate.get(position - 1).getCate_name());
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         mAllColumnAdapter = new VideoRecommendAllColumnAdapter(holder.rv_column_list.getContext(), mVideoRecommendHotCate.get(position - 1).getVideo_list());
@@ -162,7 +162,7 @@ public class VideoRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.View
      */
     private void bindFaceScoreColumnHolder(ColumnViewHolder holder, int position, boolean isItem) {
 
-        holder.img_column_icon.setImageResource(R.mipmap.icon_reco_mobile);
+        holder.img_column_icon.setImageResource(R.drawable.icon_reco_mobile);
         holder.tv_column_name.setText("热门作者");
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 1, GridLayoutManager.VERTICAL, false));
         holder.rv_column_list.setAdapter(mVideoHotAuthorColumnAdapter);
@@ -220,7 +220,7 @@ public class VideoRecommendAdapter extends BaseRecyclerAdapter<RecyclerView.View
      * @param position
      */
     private void bindColumnHolder(ColumnViewHolder holder, int position) {
-        holder.img_column_icon.setImageResource(R.mipmap.reco_game_txt_icon);
+        holder.img_column_icon.setImageResource(R.drawable.reco_game_txt_icon);
         holder.tv_column_name.setText("热门视频");
         holder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         mHotColumnAdapter = new VideoRecommendHotColumnAdapter(holder.rv_column_list.getContext(), mVideoHotColumn);

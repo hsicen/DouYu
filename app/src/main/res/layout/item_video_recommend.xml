@@ -46,7 +46,7 @@
                     android:id="@+id/img_column_more"
                     android:layout_width="@dimen/wh15.0dimens15.0dp"
                     android:layout_height="@dimen/wh15.0dimens15.0dp"
-                    android:src="@mipmap/icon_change_room"
+                    android:src="@drawable/icon_change_room"
                     android:layout_marginRight="@dimen/wh2.0dimens2.0dp"
                     android:layout_centerVertical="true"
                     android:singleLine="true"

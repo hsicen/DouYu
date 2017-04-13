@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh150.0dimens150.0dp"
-        android:background="@mipmap/usercenter_top_bg_day">
+        android:background="@drawable/usercenter_top_bg_day">
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/wh60.0dimens60.0dp"
@@ -22,7 +22,7 @@
             fresco:placeholderImageScaleType="centerCrop"
             fresco:roundAsCircle="true"
             fresco:roundingBorderWidth="2px"
-            fresco:background="@mipmap/usercenter_default_avatar"
+            fresco:background="@drawable/usercenter_default_avatar"
             fresco:roundingBorderColor="#ffffff"
             android:layout_alignParentStart="true"/>
         <RelativeLayout
@@ -109,7 +109,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/icon_usercenter_yuci"
+                        android:src="@drawable/icon_usercenter_yuci"
                         android:paddingLeft="5px"
                       />
                     <TextView
@@ -123,7 +123,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/icon_usercenter_yuwan"
+                        android:src="@drawable/icon_usercenter_yuwan"
                         android:paddingLeft="15px"
                         />
                     <TextView
@@ -166,7 +166,7 @@
                 android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/new_history_image"
+                android:src="@drawable/new_history_image"
                 />
             <TextView
                 android:layout_centerHorizontal="true"
@@ -199,7 +199,7 @@
                 android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/more_message"/>
+                android:src="@drawable/more_message"/>
             <TextView
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/iv_icon1"
@@ -230,7 +230,7 @@
                 android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/new_task_image"/>
+                android:src="@drawable/new_task_image"/>
             <TextView
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/iv_icon2"
@@ -261,7 +261,7 @@
                 android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/recharge_image"/>
+                android:src="@drawable/recharge_image"/>
             <TextView
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/iv_icon3"
@@ -285,7 +285,7 @@
             android:id="@+id/iv_anchor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_anchor_recruit"
+            android:src="@drawable/icon_anchor_recruit"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -302,7 +302,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>
@@ -319,7 +319,7 @@
             android:id="@+id/iv_my_video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_my_video"
+            android:src="@drawable/icon_my_video"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -336,7 +336,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>
@@ -357,7 +357,7 @@
             android:id="@+id/iv_video_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_video_collection"
+            android:src="@drawable/icon_video_collection"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -374,7 +374,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>
@@ -391,7 +391,7 @@
             android:id="@+id/iv_my_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_my_account"
+            android:src="@drawable/icon_my_account"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -408,7 +408,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>
@@ -429,7 +429,7 @@
             android:id="@+id/iv_image_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/image_game"
+            android:src="@drawable/image_game"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -446,7 +446,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>
@@ -462,7 +462,7 @@
             android:id="@+id/iv_clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/clock"
+            android:src="@drawable/clock"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/wh9.0dimens9.0dp"/>
 
@@ -479,7 +479,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/usercenter_grey_arrow"
+            android:src="@drawable/usercenter_grey_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/wh9.0dimens9.0dp"/>

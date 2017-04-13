@@ -31,8 +31,8 @@ import butterknife.Unbinder;
 public class MainActivity extends  AppCompatActivity implements BaseView{
     private static final String TAG_PAGE_HOME = "首页";
     private static final String TAG_PAGE_LIVE= "直播";
-    private static final String TAG_PAGE_VIDEO = "视频";
-    private static final String TAG_PAGE_FOLLOW = "关注";
+    private static final String TAG_PAGE_VIDEO = "关注";
+    private static final String TAG_PAGE_FOLLOW = "发现";
     private static final String TAG_PAGE_USER = "我的";
     protected Unbinder unbinder;
     //    退出时间
@@ -48,44 +48,41 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
-        mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.mipmap.home_pressed, R.mipmap
+        mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.drawable.home_pressed, R.drawable
                 .home_selected, TAG_PAGE_HOME));
-        mNavigateTabBar.addTab(LiveFragment.class, new NavigateTabBar.TabParam(R.mipmap.live_pressed, R.mipmap
+        mNavigateTabBar.addTab(LiveFragment.class, new NavigateTabBar.TabParam(R.drawable.live_pressed, R.drawable
                 .live_selected, TAG_PAGE_LIVE));
-        mNavigateTabBar.addTab(VideoFragment.class, new NavigateTabBar.TabParam(R.mipmap.video, R
-                .mipmap.video_selected, TAG_PAGE_VIDEO));
-        mNavigateTabBar.addTab(FollowFragment.class, new NavigateTabBar.TabParam(R.mipmap.follow_pressed,
-                R.mipmap.follow_selected, TAG_PAGE_FOLLOW));
-        mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.mipmap.user_pressed, R.mipmap
+        mNavigateTabBar.addTab(VideoFragment.class, new NavigateTabBar.TabParam(R.drawable.follow_pressed,
+                R.drawable.follow_selected, TAG_PAGE_VIDEO));
+        mNavigateTabBar.addTab(FollowFragment.class, new NavigateTabBar.TabParam(R.drawable.video,
+                R.drawable.video_selected, TAG_PAGE_FOLLOW));
+        mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable
                 .user_selected, TAG_PAGE_USER));
-        mNavigateTabBar.setTabSelectListener(new NavigateTabBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(NavigateTabBar.ViewHolder holder) {
+        mNavigateTabBar.setTabSelectListener(holder -> {
 //                Toast.makeText(MainActivity.this, "信息为:"+holder.tag, Toast.LENGTH_SHORT).show();
-                switch (holder.tag.toString()) {
+            switch (holder.tag) {
 //                    首页
-                    case TAG_PAGE_HOME:
-                        mNavigateTabBar.showFragment(holder);
-                        break;
+                case TAG_PAGE_HOME:
+                    mNavigateTabBar.showFragment(holder);
+                    break;
 //                    直播
-                    case TAG_PAGE_LIVE:
+                case TAG_PAGE_LIVE:
 
-                        mNavigateTabBar.showFragment(holder);
-                        break;
+                    mNavigateTabBar.showFragment(holder);
+                    break;
 //                    视频
-                    case TAG_PAGE_VIDEO:
-                        mNavigateTabBar.showFragment(holder);
-                        break;
+                case TAG_PAGE_VIDEO:
+                    mNavigateTabBar.showFragment(holder);
+                    break;
 //                    关注
-                    case TAG_PAGE_FOLLOW:
-                        mNavigateTabBar.showFragment(holder);
-                        break;
+                case TAG_PAGE_FOLLOW:
+                    mNavigateTabBar.showFragment(holder);
+                    break;
 //                    我的
-                    case TAG_PAGE_USER:
-                        if(mNavigateTabBar!=null)
-                        mNavigateTabBar.showFragment(holder);
-                        break;
-                }
+                case TAG_PAGE_USER:
+                    if(mNavigateTabBar!=null)
+                    mNavigateTabBar.showFragment(holder);
+                    break;
             }
         });
 //        // 获取所有权限

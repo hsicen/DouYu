@@ -11,7 +11,7 @@
         android:layout_height="100px"
         android:layout_centerVertical="true"
         android:layout_marginLeft="25px"
-        android:src="@mipmap/logo_icon" />
+        android:src="@drawable/logo_icon" />
 
     <ImageView
         android:id="@+id/img_search"

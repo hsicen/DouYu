@@ -17,7 +17,7 @@ public class GuideActivity extends AppCompatActivity {
     @BindView(R.id.guide)
     ViewPager vp_guide;
 
-    int[] guides = new int[]{R.mipmap.guide_bg1, R.mipmap.guide_bg2, R.mipmap.guide_bg3, R.mipmap.guide_bg4};
+    int[] guides = new int[]{R.drawable.guide_bg1, R.drawable.guide_bg2, R.drawable.guide_bg3, R.drawable.guide_bg4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -51,7 +51,7 @@
             android:id="@+id/xrefreshview_header_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/xrefreshview_arrow" />
+            android:src="@drawable/xrefreshview_arrow" />
         <ProgressBar
             android:id="@+id/xrefreshview_header_progressbar"
             style="@style/mProgress_circle"

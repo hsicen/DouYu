@@ -75,7 +75,7 @@ public class HomeNgBarAdapter extends BaseAdapter {
         final int pos = position + mIndex * mPagerSize;
         if (pos == 15) {
             holder.proName.setText("全部分类");
-            holder.imgIcon.setImageURI(Uri.parse("res://com.team.zhuoke/" + R.mipmap.more_icon));
+            holder.imgIcon.setImageURI(Uri.parse("res://com.team.zhuoke/" + R.drawable.more_icon));
         } else {
             holder.proName.setText(mHomeCate.get(pos).getTag_name());
             holder.imgIcon.setImageURI(Uri.parse(mHomeCate.get(pos).getIcon_url()));

@@ -86,7 +86,7 @@ public class HomeOtherAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolde
      */
     private void bindAllColumnHolder(ColumnViewHolder holder, int position) {
 //        if(mHomeRecommendHotCate.get(position).getRoom_list().size()>=4) {
-        holder.img_column_icon.setImageResource(R.mipmap.icon_column);
+        holder.img_column_icon.setImageResource(R.drawable.icon_column);
         holder.tv_column_name.setText(mHomeRecommendHotCate.get(position).getTag_name());
         holder.rv_column_list.setLayoutManager(new GridLayoutManager(holder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
         mAllColumnAdapter = new HomeRecommendAllColumnAdapter(holder.rv_column_list.getContext(), mHomeRecommendHotCate.get(position).getRoom_list());

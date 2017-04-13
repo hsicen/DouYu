@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="40dp"
-        android:src="@mipmap/icon_empty_video_collection" />
+        android:src="@drawable/icon_empty_video_collection" />
     <TextView
         android:id="@+id/tv_msg_empty"
         android:layout_below="@id/empty_icon"

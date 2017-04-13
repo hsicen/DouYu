@@ -108,12 +108,7 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
             @Override
             public void onRefresh() {
 //                延迟500毫秒, 原因 用户体验好 !!!
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refresh();
-                    }
-                }, 500);
+                new Handler().postDelayed(() -> refresh(), 500);
             }
         });
     }

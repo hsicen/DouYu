@@ -9,7 +9,7 @@
       android:layout_width="@dimen/wh25.0dimens25.0dp"
       android:layout_height="@dimen/wh25.0dimens25.0dp"
       android:layout_centerVertical="true"
-      android:src="@mipmap/img_back"
+      android:src="@drawable/img_back"
       android:layout_marginLeft="@dimen/wh5.0dimens5.0dp"
       />
     <TextView
