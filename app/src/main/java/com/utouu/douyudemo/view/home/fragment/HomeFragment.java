@@ -30,14 +30,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 修改时间：2016/11/14 上午11:50
- **/
+ * Create by 黄思程 on 2017/4/13  17:08
+ * Function：
+ * Desc：首页
+ */
 public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateListPresenterImp>
         implements HomeCateListContract.View {
 
@@ -50,8 +46,6 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
     @BindView(R.id.viewpager) ViewPager viewpager;
 
     SVProgressHUD svProgressHUD;
-    private HomeAllListAdapter mAdapter;
-    private String[] mTitles;
     private List<String> hintText;
     private Subscription subscribe;
 
@@ -61,7 +55,7 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
     }
     @Override
     protected void onInitView(Bundle bundle) {
-        hintText = Arrays.asList("skt", "asmr", "h1z1", "lck", "糯米", "狼人杀",
+        hintText = Arrays.asList("黄思程", "asmr", "h1z1", "lck", "糯米", "狼人杀",
                 "初代", "绝地求生", "贝贝", "青春联练习生");
         svProgressHUD = new SVProgressHUD(getActivity());
 
@@ -83,16 +77,16 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
 
     @Override
     public void getHomeAllList(List<HomeCateList> cateLists) {
-        mTitles = new String[cateLists.size()+1];
+        String[] mTitles = new String[cateLists.size() + 1];
         mTitles[0]="推荐";
         for (int i=0;i<cateLists.size();i++)
             mTitles[i+1]=cateLists.get(i).getTitle();
 
         viewpager.setOffscreenPageLimit(mTitles.length);
-        mAdapter = new HomeAllListAdapter(getChildFragmentManager(),cateLists,mTitles);
+        HomeAllListAdapter mAdapter = new HomeAllListAdapter(getChildFragmentManager(), cateLists, mTitles);
         viewpager.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        slidingTab.setViewPager(viewpager,mTitles);
+        slidingTab.setViewPager(viewpager, mTitles);
     }
     @Override
     public void showErrorWithStatus(String msg) {

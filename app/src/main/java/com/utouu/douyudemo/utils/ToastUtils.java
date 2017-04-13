@@ -4,8 +4,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Toast相关方法
- * Created by tsy on 16/8/15.
+ * Create by 黄思程 on 2017/4/13  17:12
+ * Function：
+ * Desc：不会重复提示的ToastUtil
  */
 public class ToastUtils {
 

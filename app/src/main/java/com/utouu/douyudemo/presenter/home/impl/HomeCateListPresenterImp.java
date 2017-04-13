@@ -8,14 +8,10 @@ import com.utouu.douyudemo.presenter.home.interfaces.HomeCateListContract;
 import java.util.List;
 
 /**
- *  作者：gaoyin
- *  电话：18810474975
- *  邮箱：18810474975@163.com
- *  版本号：1.0
- *  类描述：
- *  备注消息：
- *  修改时间：2016/12/12 下午4:21
- **/
+ * Create by 黄思程 on 2017/4/13  17:12
+ * Function：
+ * Desc：首页数据加载
+ */
 public class HomeCateListPresenterImp extends HomeCateListContract.Presenter {
 
     @Override
