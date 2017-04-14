@@ -38,9 +38,9 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
     //    每页加载数量
     private  int limit = 20;
     @BindView(R.id.livesports_content_recyclerview)
-    RecyclerView livesportsContentRecyclerview;
+    RecyclerView livesSportsContentRecyclerView;
     @BindView(R.id.rtefresh_content)
-    XRefreshView rtefreshContent;
+    XRefreshView refreshContent;
     private LiveSportsColumnListAdapter mLiveSportsColumnListAdapter;
 
     public static LiveSportsColumnFragment getInstance() {
@@ -55,11 +55,11 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
 
     @Override
     protected void onInitView(Bundle bundle) {
-        setXrefeshViewConfig();
-        livesportsContentRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
+        setXrefViewConfig();
+        livesSportsContentRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
         mLiveSportsColumnListAdapter=new LiveSportsColumnListAdapter(getActivity());
-        livesportsContentRecyclerview.setAdapter(mLiveSportsColumnListAdapter);
-        rtefreshContent.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        livesSportsContentRecyclerView.setAdapter(mLiveSportsColumnListAdapter);
+        refreshContent.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh() {
 //                延迟500毫秒, 原因 用户体验好 !!!
@@ -96,14 +96,14 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
     /**
      * 配置XRefreshView
      */
-    protected void setXrefeshViewConfig() {
-        rtefreshContent.setPinnedTime(2000);
-        rtefreshContent.setPullLoadEnable(true);
-        rtefreshContent.setPullRefreshEnable(true);
-        rtefreshContent.setMoveForHorizontal(true);
-        rtefreshContent.setPinnedContent(true);
+    protected void setXrefViewConfig() {
+        refreshContent.setPinnedTime(2000);
+        refreshContent.setPullLoadEnable(true);
+        refreshContent.setPullRefreshEnable(true);
+        refreshContent.setMoveForHorizontal(true);
+        refreshContent.setPinnedContent(true);
 //        滚动到底部 自动加载数据
-        rtefreshContent.setSilenceLoadMore();
+        refreshContent.setSilenceLoadMore();
 
     }
 
@@ -119,9 +119,9 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
 
     @Override
     public void getViewLiveSportsColumnAllListColumn(List<LiveSportsAllList> mLiveAllList) {
-                 if(rtefreshContent!=null)
+                 if(refreshContent !=null)
                  {
-                     rtefreshContent.stopRefresh();
+                     refreshContent.stopRefresh();
                  }
             mLiveSportsColumnListAdapter.getLiveLiveSportsColumnList(mLiveAllList);
     }
@@ -129,19 +129,19 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
     @Override
     public void getViewLiveSportsColumnAllListLoadMore(List<LiveSportsAllList> mLiveAllList) {
 
-           if(rtefreshContent!=null)
+           if(refreshContent !=null)
            {
-                rtefreshContent.stopLoadMore();
+                refreshContent.stopLoadMore();
            }
         mLiveSportsColumnListAdapter.getLiveSportsColumnListLoadMore(mLiveAllList);
     }
 
     @Override
     public void showErrorWithStatus(String msg) {
-    if(rtefreshContent!=null)
+    if(refreshContent !=null)
     {
-          rtefreshContent.stopRefresh(false);
-        rtefreshContent.stopLoadMore(false);
+          refreshContent.stopRefresh(false);
+        refreshContent.stopLoadMore(false);
     }
     }
 }

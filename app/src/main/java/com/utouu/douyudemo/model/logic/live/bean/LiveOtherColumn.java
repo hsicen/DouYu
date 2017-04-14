@@ -3,14 +3,10 @@ package com.utouu.douyudemo.model.logic.live.bean;
 import java.io.Serializable;
 
 /**
- *  作者：gaoyin
- *  电话：18810474975
- *  邮箱：18810474975@163.com
- *  版本号：1.0
- *  类描述：  其他栏目分类
- *  备注消息：
- *  修改时间：2017/2/7 下午3:49
- **/
+ * Create by 李俊鹏 on 2017/4/14 17:06
+ * Function：
+ * Desc：
+ */
 public class LiveOtherColumn  implements Serializable{
 
     /**

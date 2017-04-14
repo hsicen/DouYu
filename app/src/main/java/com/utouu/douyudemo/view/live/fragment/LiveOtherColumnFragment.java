@@ -15,7 +15,6 @@ import com.utouu.douyudemo.model.logic.live.bean.LiveOtherColumn;
 import com.utouu.douyudemo.model.logic.live.bean.LiveOtherTwoColumn;
 import com.utouu.douyudemo.presenter.live.impl.LiveOtherTwoColumnPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveOtherTwoColumnContract;
-import com.utouu.douyudemo.ui.popup.PopupLiveList;
 import com.utouu.douyudemo.view.live.adapter.LiveOtherTwoCloumnAdapter;
 
 import java.util.ArrayList;
@@ -26,29 +25,21 @@ import butterknife.BindView;
 import static com.utouu.douyudemo.R.id.img_popup_live;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 修改时间：2017/2/8 上午10:22
- **/
+ * Create by 李俊鹏 on 2017/4/14 17:06
+ * Function：
+ * Desc：
+ */
 public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnModelLogic, LiveOtherTwoColumnPresenterImp> implements LiveOtherTwoColumnContract.View {
     private static List<LiveOtherColumnFragment> mLiveOtherColumnFragment = new ArrayList<LiveOtherColumnFragment>();
     @BindView(R.id.twocolumn_tablayout)
-    SlidingTabLayout twocolumnTablayout;
+    SlidingTabLayout twoColumnTabLayout;
     @BindView(R.id.livetwocolumn_viewpager)
-    ViewPager livetwocolumnViewpager;
+    ViewPager liveTwoColumnViewpager;
     @BindView(R.id.rl_twocolumn_bar)
-    RelativeLayout rlTwocolumnBar;
+    RelativeLayout rlTwoColumnBar;
     @BindView(img_popup_live)
     ImageView imgPopupLive;
-    private LiveOtherColumn mLiveOtherColumn;
-    private LiveOtherTwoCloumnAdapter mLiveOtherTwoColumnAdapter;
-    private String[] mTilte;
 
-    private PopupLiveList mPopupLiveList;
 
     private List<LiveOtherTwoColumn> mLiveOtherTwoColumn;
 
@@ -124,7 +115,7 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
     @Override
     protected void lazyFetchData() {
         Bundle arguments = getArguments();
-        mLiveOtherColumn = (LiveOtherColumn) arguments.getSerializable("mLiveOtherColumn");
+        LiveOtherColumn mLiveOtherColumn = (LiveOtherColumn) arguments.getSerializable("mLiveOtherColumn");
         mPresenter.getPresenterLiveOtherTwoColumn(mLiveOtherColumn.getShort_name());
 
     }
@@ -141,20 +132,20 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
      */
     @Override
     public void getViewLiveOtherTwoColumn(List<LiveOtherTwoColumn> mLiveOtherTwoCloumn) {
-        mTilte = new String[mLiveOtherTwoCloumn.size()];
+        String[] mTitle = new String[mLiveOtherTwoCloumn.size()];
         for (int i = 0; i < mLiveOtherTwoCloumn.size(); i++) {
-            mTilte[i] = mLiveOtherTwoCloumn.get(i).getTag_name();
+            mTitle[i] = mLiveOtherTwoCloumn.get(i).getTag_name();
         }
-        if (mTilte.length <= 1) {
-            rlTwocolumnBar.setVisibility(View.GONE);
+        if (mTitle.length <= 1) {
+            rlTwoColumnBar.setVisibility(View.GONE);
         }
         this.mLiveOtherTwoColumn.clear();
         this.mLiveOtherTwoColumn.addAll(mLiveOtherTwoCloumn);
 
-        livetwocolumnViewpager.setOffscreenPageLimit(mTilte.length);
-        mLiveOtherTwoColumnAdapter = new LiveOtherTwoCloumnAdapter(getChildFragmentManager(), mLiveOtherTwoCloumn, mTilte);
-        livetwocolumnViewpager.setAdapter(mLiveOtherTwoColumnAdapter);
+        liveTwoColumnViewpager.setOffscreenPageLimit(mTitle.length);
+        LiveOtherTwoCloumnAdapter mLiveOtherTwoColumnAdapter = new LiveOtherTwoCloumnAdapter(getChildFragmentManager(), mLiveOtherTwoCloumn, mTitle);
+        liveTwoColumnViewpager.setAdapter(mLiveOtherTwoColumnAdapter);
         mLiveOtherTwoColumnAdapter.notifyDataSetChanged();
-        twocolumnTablayout.setViewPager(livetwocolumnViewpager, mTilte);
+        twoColumnTabLayout.setViewPager(liveTwoColumnViewpager, mTitle);
     }
 }

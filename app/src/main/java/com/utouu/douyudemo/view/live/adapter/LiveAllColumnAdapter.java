@@ -13,14 +13,10 @@ import com.utouu.douyudemo.view.live.fragment.LiveSportsColumnFragment;
 import java.util.List;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 修改时间：2017/2/7 下午4:41
- **/
+ * Create by 李俊鹏 on 2017/4/14 17:06
+ * Function：
+ * Desc：
+ */
 public class LiveAllColumnAdapter extends FragmentStatePagerAdapter {
 
     private List<LiveOtherColumn> mLiveOtherColumns;
