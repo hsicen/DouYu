@@ -2,9 +2,6 @@ package com.utouu.douyudemo.view.live.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -15,22 +12,17 @@ import com.utouu.douyudemo.model.logic.live.LiveOtherColumnModelLogic;
 import com.utouu.douyudemo.model.logic.live.bean.LiveOtherColumn;
 import com.utouu.douyudemo.presenter.live.impl.LiveOtherColumnPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveOtherColumnContract;
-import com.utouu.douyudemo.view.live.adapter.LiveAllCloumnAdapter;
+import com.utouu.douyudemo.view.live.adapter.LiveAllColumnAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 修改时间：2016/11/14 上午11:50
- **/
+ * Create by 李俊鹏 on 2017/4/14 15:19
+ * Function：
+ * Desc：直播
+ */
 public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOtherColumnPresenterImp> implements LiveOtherColumnContract.View {
 
     SVProgressHUD svProgressHUD;
@@ -38,9 +30,7 @@ public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOt
     SlidingTabLayout liveSlidingTab;
     @BindView(R.id.live_viewpager)
     ViewPager liveViewpager;
-    private String[] mTilte;
 
-    private LiveAllCloumnAdapter mLiveAllColumnAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -83,26 +73,19 @@ public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOt
      */
     @Override
     public void getViewLiveOtherColumn(List<LiveOtherColumn> mLiveOtherColumns) {
-        mTilte = new String[mLiveOtherColumns.size() + 3];
-        mTilte[0] = "常用";
-        mTilte[1] = "全部";
+        String[] mTitle = new String[mLiveOtherColumns.size() + 3];
+        mTitle[0] = "常用";
+        mTitle[1] = "全部";
         for (int i = 0; i < mLiveOtherColumns.size(); i++) {
-            mTilte[i + 2] = mLiveOtherColumns.get(i).getCate_name();
+            mTitle[i + 2] = mLiveOtherColumns.get(i).getCate_name();
         }
-        mTilte[mTilte.length - 1] = "体育直播";
-        liveViewpager.setOffscreenPageLimit(mTilte.length);
-        mLiveAllColumnAdapter = new LiveAllCloumnAdapter(getChildFragmentManager(), mLiveOtherColumns, mTilte);
+        mTitle[mTitle.length - 1] = "体育直播";
+        liveViewpager.setOffscreenPageLimit(mTitle.length);
+        LiveAllColumnAdapter mLiveAllColumnAdapter = new LiveAllColumnAdapter(getChildFragmentManager(), mLiveOtherColumns, mTitle);
         liveViewpager.setAdapter(mLiveAllColumnAdapter);
         mLiveAllColumnAdapter.notifyDataSetChanged();
-        liveSlidingTab.setViewPager(liveViewpager, mTilte);
+        liveSlidingTab.setViewPager(liveViewpager, mTitle);
         liveSlidingTab.setCurrentTab(1);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }

@@ -19,14 +19,10 @@ import java.util.List;
 
 import butterknife.BindView;
 /**
- *  作者：gaoyin
- *  电话：18810474975
- *  邮箱：18810474975@163.com
- *  版本号：1.0
- *  类描述：
- *  备注消息：
- *  修改时间：2017/2/9 下午12:49
- **/
+ * Create by 李俊鹏 on 2017/4/14 15:47
+ * Function：
+ * Desc：直播模块所有页面
+ */
 public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, LiveAllListPresenterImp> implements LiveAllListContract.View {
 
     /**
@@ -37,14 +33,13 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     //    每页加载数量
     private  int limit = 20;
     @BindView(R.id.rtefresh_content)
-    XRefreshView rtefreshContent;
+    XRefreshView refreshContent;
     @BindView(R.id.livealllist_content_recyclerview)
-    RecyclerView livealllistContentRecyclerview;
+    RecyclerView liveAllListContentRecyclerView;
     private LiveAllListAdapter mLiveAllListAdapter;
 
     public static LiveAllColumnFragment getInstance() {
-        LiveAllColumnFragment rf = new LiveAllColumnFragment();
-        return rf;
+        return new LiveAllColumnFragment();
     }
 
     @Override
@@ -56,11 +51,11 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     @Override
     protected void onInitView(Bundle bundle) {
 
-        setXrefeshViewConfig();
-        livealllistContentRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
+        setXrefViewConfig();
+        liveAllListContentRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
         mLiveAllListAdapter=new LiveAllListAdapter(getActivity());
-        livealllistContentRecyclerview.setAdapter(mLiveAllListAdapter);
-        rtefreshContent.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+        liveAllListContentRecyclerView.setAdapter(mLiveAllListAdapter);
+        refreshContent.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onRefresh() {
 //                延迟500毫秒, 原因 用户体验好 !!!
@@ -96,14 +91,14 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     /**
      * 配置XRefreshView
      */
-    protected void setXrefeshViewConfig() {
-        rtefreshContent.setPinnedTime(2000);
-        rtefreshContent.setPullLoadEnable(true);
-        rtefreshContent.setPullRefreshEnable(true);
-        rtefreshContent.setMoveForHorizontal(true);
-        rtefreshContent.setPinnedContent(true);
+    protected void setXrefViewConfig() {
+        refreshContent.setPinnedTime(2000);
+        refreshContent.setPullLoadEnable(true);
+        refreshContent.setPullRefreshEnable(true);
+        refreshContent.setMoveForHorizontal(true);
+        refreshContent.setPinnedContent(true);
 //        滚动到底部 自动加载数据
-        rtefreshContent.setSilenceLoadMore();
+        refreshContent.setSilenceLoadMore();
 
     }
     @Override
@@ -117,23 +112,23 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     }
     @Override
     public void getViewLiveAllListColumn(List<LiveAllList> mLiveAllList) {
-        if (rtefreshContent != null) {
-            rtefreshContent.stopRefresh();
+        if (refreshContent != null) {
+            refreshContent.stopRefresh();
         }
         mLiveAllListAdapter.getLiveAllList(mLiveAllList);
     }
     @Override
     public void getViewLiveAllListLoadMore(List<LiveAllList> mLiveAllList) {
-        if (rtefreshContent != null) {
-             rtefreshContent.stopLoadMore();
+        if (refreshContent != null) {
+             refreshContent.stopLoadMore();
         }
         mLiveAllListAdapter.getLiveAllListLoadMore(mLiveAllList);
     }
     @Override
     public void showErrorWithStatus(String msg) {
-        if (rtefreshContent != null) {
-            rtefreshContent.stopRefresh(false);
-            rtefreshContent.stopLoadMore(false);
+        if (refreshContent != null) {
+            refreshContent.stopRefresh(false);
+            refreshContent.stopLoadMore(false);
         }
     }
 }

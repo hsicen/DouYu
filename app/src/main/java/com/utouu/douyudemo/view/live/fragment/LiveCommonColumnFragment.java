@@ -6,19 +6,14 @@ import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
 /**
- *  作者：gaoyin
- *  电话：18810474975
- *  邮箱：18810474975@163.com
- *  版本号：1.0
- *  类描述：
- *  备注消息：
- *  修改时间：2017/2/21 下午1:54
- **/
+ * Create by 李俊鹏 on 2017/4/14 15:46
+ * Function：
+ * Desc：直播列表中常用页面
+ */
 public class LiveCommonColumnFragment extends BaseFragment {
 
     public static LiveCommonColumnFragment getInstance() {
-        LiveCommonColumnFragment rf = new LiveCommonColumnFragment();
-        return rf;
+        return new LiveCommonColumnFragment();
     }
     @Override
     protected int getLayoutId() {
