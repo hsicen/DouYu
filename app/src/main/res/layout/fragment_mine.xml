@@ -24,8 +24,6 @@
                 android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
                 android:layout_marginTop="@dimen/wh38.0dimens38.0dp"
                 fresco:actualImageScaleType="centerCrop"
-                fresco:background="@drawable/usercenter_default_avatar"
-                fresco:placeholderImage="@mipmap/usercenter_default_avatar"
                 fresco:placeholderImageScaleType="centerCrop"
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderColor="#ffffff"

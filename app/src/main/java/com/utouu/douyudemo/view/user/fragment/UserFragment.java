@@ -97,6 +97,7 @@ public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> i
     protected void onInitView(Bundle bundle) {
         svProgressHUD = new SVProgressHUD(getActivity());
         mLoginPopwindow=new LoginPopWindow(getActivity());
+        ivAvatar.setImageResource(R.drawable.usercenter_default_avatar);
 
         mFloatButton.setClosedOnTouchOutside(true);
         createCustomAnimation();
