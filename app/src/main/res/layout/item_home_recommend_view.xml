@@ -46,6 +46,7 @@
                 android:layout_width="@dimen/wh60.0dimens60.0dp"
                 android:layout_height="@dimen/wh18.0dimens18.0dp"
                 android:layout_alignParentLeft="true"
+                android:visibility="invisible"
                 android:background="@drawable/search_header_live_type_pc"
                 android:gravity="center">
             </RelativeLayout>

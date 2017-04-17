@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
     }
     @Override
     protected void onInitView(Bundle bundle) {
-        hintText = Arrays.asList("黄思程", "asmr", "h1z1", "lck", "糯米", "狼人杀",
+        hintText = Arrays.asList("skt", "asmr", "h1z1", "lck", "糯米", "狼人杀",
                 "初代", "绝地求生", "贝贝", "青春联练习生");
         svProgressHUD = new SVProgressHUD(getActivity());
 

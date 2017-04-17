@@ -9,6 +9,9 @@ import android.view.View;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.flyco.tablayout.CommonTabLayout;
+import com.flyco.tablayout.listener.CustomTabEntity;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
@@ -17,9 +20,11 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeCarousel;
 import com.utouu.douyudemo.model.logic.home.bean.HomeFaceScoreColumn;
 import com.utouu.douyudemo.model.logic.home.bean.HomeHotColumn;
 import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
+import com.utouu.douyudemo.model.logic.home.bean.TabEntity;
 import com.utouu.douyudemo.presenter.home.impl.HomeRecommendPresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeRecommendContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.utils.ToastUtils;
 import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
 import com.utouu.douyudemo.view.home.adapter.HomeCarouselAdapter;
 import com.utouu.douyudemo.view.home.adapter.HomeRecommendAdapter;
@@ -30,31 +35,35 @@ import java.util.List;
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
-
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：  推荐页
- * 备注消息：
- * 修改时间：2016/12/15 下午4:01
- **/
-public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic, HomeRecommendPresenterImp> implements HomeRecommendContract.View, BGABanner.Delegate<SimpleDraweeView, String> {
+ * Create by 黄思程 on 2017/4/17  9:46
+ * Function：
+ * Desc：首页 -- 推荐页面
+ */
+public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic, HomeRecommendPresenterImp>
+        implements HomeRecommendContract.View, BGABanner.Delegate<SimpleDraweeView, String>,OnTabSelectListener {
+
+    private static final String[] mTitles = {"排行榜", "消息", "活动", "全部直播"};
+    private static final int[] bannerTabIcon = {
+            R.drawable.icon_reco_rank, R.drawable.icon_reco_msg,
+            R.drawable.ic_reco_active, R.drawable.icon_reco_all_live};
+
+    @BindView(R.id.rtefresh_content) XRefreshView rtefreshContent;
+    @BindView(R.id.recommend_content_recyclerview) RecyclerView recommed_recyclerview;
+
     SVProgressHUD svProgressHUD;
-    @BindView(R.id.rtefresh_content)
-    XRefreshView rtefreshContent;
-    @BindView(R.id.recommend_content_recyclerview)
-    RecyclerView recommed_recyclerview;
     private HomeRecommendAdapter adapter;
-    private HomeCarouselAdapter mRecommedBannerAdapter;
     private BGABanner recommed_banner;
-    private View haderView;
+    private CommonTabLayout bannerTab;
+
     private List<HomeCarousel> mHomeCarousel;
+    private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     public static RecommendHomeFragment getInstance() {
-        RecommendHomeFragment rf = new RecommendHomeFragment();
-        return rf;
+        Bundle args = new Bundle();
+        RecommendHomeFragment fragment = new RecommendHomeFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -64,16 +73,26 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
 
     @Override
     protected void onInitView(Bundle bundle) {
+
+        for (int i = 0; i < mTitles.length; i++) {
+            mTabEntities.add(new TabEntity(mTitles[i], bannerTabIcon[i], bannerTabIcon[i]));
+        }
+
         svProgressHUD = new SVProgressHUD(getActivity());
         recommed_recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new HomeRecommendAdapter(getContext());
-        mHomeCarousel=new ArrayList<HomeCarousel>();
+        mHomeCarousel=new ArrayList<>();
         pool.setMaxRecycledViews(adapter.getItemViewType(0), 500);
         recommed_recyclerview.setRecycledViewPool(pool);
         recommed_recyclerview.setAdapter(adapter);
-        mRecommedBannerAdapter = new HomeCarouselAdapter();
-        haderView = adapter.setHeaderView(R.layout.item_home_recommend_banner, recommed_recyclerview);
-        recommed_banner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
+        HomeCarouselAdapter mRecommedBannerAdapter = new HomeCarouselAdapter();
+
+        View headView = adapter.setHeaderView(R.layout.item_home_recommend_banner, recommed_recyclerview);
+        recommed_banner=(BGABanner) headView.findViewById(R.id.recommed_banner);
+        bannerTab = (CommonTabLayout) headView.findViewById(R.id.bannerTab);
+        bannerTab.setTabData(mTabEntities);
+
+        bannerTab.setOnTabSelectListener(this);
         recommed_banner.setDelegate(this);
         recommed_banner.setAdapter(mRecommedBannerAdapter);
         setXrefeshViewConfig();
@@ -130,8 +149,7 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
         }
         this.mHomeCarousel.clear();
         this.mHomeCarousel.addAll(mHomeCarousel);
-//        recommed_banner.setDelegate(this);
-        ArrayList<String> pic_url = new ArrayList<String>();
+        ArrayList<String> pic_url = new ArrayList<>();
         for (int i = 0; i < mHomeCarousel.size(); i++) {
             pic_url.add(mHomeCarousel.get(i).getPic_url());
         }
@@ -166,7 +184,6 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
      * 刷新网络数据
      */
     private void refresh() {
-//        轮播图
         mPresenter.getPresenterCarousel();
         mPresenter.getPresenterHotColumn();
         mPresenter.getPresenterFaceScoreColumn(0, 4);
@@ -191,5 +208,17 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
         bundle.putString("Room_id",mHomeCarousel.get(position).getRoom().getRoom_id());
         intent.putExtras(bundle);
         getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void onTabSelect(int position) {
+        int currentTab = bannerTab.getCurrentTab();
+        ToastUtils.showShort(mContext,"正在开发"+mTitles[currentTab]+"页面");
+    }
+
+    @Override
+    public void onTabReselect(int position) {
+        int currentTab = bannerTab.getCurrentTab();
+        ToastUtils.showShort(mContext,"不要着急，正在开发"+mTitles[currentTab]+"页面");
     }
 }

@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.bingoogolapple.bgabanner.BGABanner
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:id="@+id/bannerLayout"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <cn.bingoogolapple.bgabanner.BGABanner xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/recommed_banner"
         style="@style/BannerDefaultStyle"
-        app:banner_indicatorGravity="bottom|right"
-        app:banner_isNeedShowIndicatorOnOnlyOnePage="true"
-        app:banner_isNumberIndicator="true"
-        app:banner_numberIndicatorBackground="@drawable/shape_number_indicator_background"
-        app:banner_numberIndicatorTextColor="@android:color/white"
-        app:banner_numberIndicatorTextSize="10sp"
+        app:banner_indicatorGravity="bottom|center_horizontal"
+        app:banner_isNeedShowIndicatorOnOnlyOnePage="false"
+        app:banner_isNumberIndicator="false"
         app:banner_pointAutoPlayAble="true"
         app:banner_pointContainerBackground="@android:color/transparent"
-        android:layout_alignParentTop="true"
+        app:banner_pointDrawable="@drawable/banner_selector"
+        app:banner_pointTopBottomMargin="3dp"
+        app:banner_transitionEffect="alpha" />
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/bannerTab"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#FFFF"
+        android:paddingLeft="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_6"
+        app:tl_iconHeight="43dp"
+        app:tl_iconWidth="33dp"
+        app:tl_indicator_color="#2C97DE"
+        app:tl_indicator_height="0dp"
+        app:tl_tab_space_equal="true"
+        app:tl_textSelectColor="@color/tab_text_normal"
+        app:tl_textUnselectColor="@color/tab_text_normal"
+        app:tl_textsize="14sp"
+        app:tl_underline_height="1dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/base_line"/>
+
+</LinearLayout>
+
+    <!--
+    <cn.bingoogolapple.bgabanner.BGABanner xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recommed_banner"
+        style="@style/BannerDefaultStyle"
         android:layout_alignParentStart="true"
-        app:banner_transitionEffect="depth"
- />
+        android:layout_alignParentTop="true"
+        app:banner_indicatorGravity="bottom|center_horizontal"
+        app:banner_isNeedShowIndicatorOnOnlyOnePage="false"
+        app:banner_isNumberIndicator="false"
+        app:banner_pointAutoPlayAble="true"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_pointDrawable="@drawable/banner_selector"
+        app:banner_pointTopBottomMargin="3dp"
+        app:banner_transitionEffect="alpha" />-->
