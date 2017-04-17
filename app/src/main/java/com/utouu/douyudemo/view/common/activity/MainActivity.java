@@ -24,13 +24,15 @@ import butterknife.Unbinder;
  * Function：
  * Desc：主界面
  */
-public class MainActivity extends  AppCompatActivity implements BaseView{
+public class MainActivity extends AppCompatActivity implements BaseView,
+        NavigateTabBar.OnTabSelectedListener {
 
     @BindView(R.id.mainTabBar)
     NavigateTabBar mNavigateTabBar;
 
+
     private static final String TAG_PAGE_HOME = "首页";
-    private static final String TAG_PAGE_LIVE= "直播";
+    private static final String TAG_PAGE_LIVE = "直播";
     private static final String TAG_PAGE_VIDEO = "关注";
     private static final String TAG_PAGE_FOLLOW = "发现";
     private static final String TAG_PAGE_USER = "我的";
@@ -53,42 +55,14 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
                 R.drawable.video_selected, TAG_PAGE_FOLLOW));
         mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable
                 .user_selected, TAG_PAGE_USER));
-        mNavigateTabBar.setTabSelectListener(holder -> {
-            switch (holder.tag) {
-                case TAG_PAGE_HOME:
-                    mNavigateTabBar.showFragment(holder);
-                    break;
-                case TAG_PAGE_LIVE:
-                    mNavigateTabBar.showFragment(holder);
-                    break;
-                case TAG_PAGE_VIDEO:
-                    mNavigateTabBar.showFragment(holder);
-                    break;
-                case TAG_PAGE_FOLLOW:
-                    mNavigateTabBar.showFragment(holder);
-                    break;
-                case TAG_PAGE_USER:
-                    if(mNavigateTabBar!=null)
-                    mNavigateTabBar.showFragment(holder);
-                    break;
-            }
-        });
-        /*// 获取所有权限
-        PermissionUtil.requestAllPermission(new PermissionUtil.RequestPermission() {
-            @Override
-            public void onRequestPermissionSuccess() {
 
-            }
 
-            @Override
-            public void onRequestPermissionFailed() {
-
-            }
-        }, new RxPermissions(MainActivity.this),this);*/
+        mNavigateTabBar.setTabSelectListener(this);
     }
 
     /**
      * 拦截返回键，要求点击两次返回键才退出应用
+     *
      * @param keyCode 按键代码
      * @param event   点击事件
      * @return 是否处理本次事件
@@ -123,6 +97,7 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
 
     /**
      * 保存数据状态
+     *
      * @param outState
      */
     @Override
@@ -134,5 +109,27 @@ public class MainActivity extends  AppCompatActivity implements BaseView{
     @Override
     public void showErrorWithStatus(String msg) {
 
+    }
+
+    @Override
+    public void onTabSelected(NavigateTabBar.ViewHolder holder) {
+        switch (holder.tag) {
+            case TAG_PAGE_HOME:
+                mNavigateTabBar.showFragment(holder);
+                break;
+            case TAG_PAGE_LIVE:
+                mNavigateTabBar.showFragment(holder);
+                break;
+            case TAG_PAGE_VIDEO:
+                mNavigateTabBar.showFragment(holder);
+                break;
+            case TAG_PAGE_FOLLOW:
+                mNavigateTabBar.showFragment(holder);
+                break;
+            case TAG_PAGE_USER:
+                if (mNavigateTabBar != null)
+                    mNavigateTabBar.showFragment(holder);
+                break;
+        }
     }
 }

@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tv_column_list"
-            android:numColumns="3"
-            ></GridView>
+            android:numColumns="3"/>
     </RelativeLayout>
 
 </RelativeLayout>
