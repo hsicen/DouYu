@@ -122,7 +122,6 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
 
     @Override
     public void showErrorWithStatus(String msg) {
-
     }
 
     /**
@@ -136,8 +135,8 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
         for (int i = 0; i < mLiveOtherTwoCloumn.size(); i++) {
             mTitle[i] = mLiveOtherTwoCloumn.get(i).getTag_name();
         }
-        if (mTitle.length <= 1) {
-            rlTwoColumnBar.setVisibility(View.GONE);
+        if (mTitle.length > 1) {
+            rlTwoColumnBar.setVisibility(View.VISIBLE);
         }
         this.mLiveOtherTwoColumn.clear();
         this.mLiveOtherTwoColumn.addAll(mLiveOtherTwoCloumn);

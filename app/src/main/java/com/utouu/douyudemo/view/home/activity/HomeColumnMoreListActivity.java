@@ -90,8 +90,8 @@ public class HomeColumnMoreListActivity extends SwipeBackActivity<HomeColumnMore
         for (int i = 0; i < mHomeColumnMoreTwoCate.size(); i++) {
             mTilte[i + 1] = mHomeColumnMoreTwoCate.get(i).getName();
         }
-        if (mTilte.length <= 1) {
-            rlTwocolumnBar.setVisibility(View.GONE);
+        if (mTilte.length > 1) {
+            rlTwocolumnBar.setVisibility(View.VISIBLE);
         }
         livetwocolumnViewpager.setOffscreenPageLimit(mTilte.length);
         mHomeColumnMoreTwoCateAdapter = new HomeColumnMoreTwoCateAdapter(getSupportFragmentManager(), getIntent().getExtras().getString("cate_id"), mHomeColumnMoreTwoCate, mTilte);
