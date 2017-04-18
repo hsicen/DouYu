@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseView;
 import com.utouu.douyudemo.ui.NavigateTabBar;
+import com.utouu.douyudemo.ui.popup.LoginPopWindow;
 import com.utouu.douyudemo.view.follow.fragment.FollowFragment;
 import com.utouu.douyudemo.view.home.fragment.HomeFragment;
 import com.utouu.douyudemo.view.live.fragment.LiveFragment;
@@ -41,21 +42,23 @@ public class MainActivity extends AppCompatActivity implements BaseView,
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        new LoginPopWindow(MainActivity.this).showPopupWindow();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
+
         mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
         mNavigateTabBar.addTab(HomeFragment.class, new NavigateTabBar.TabParam(R.drawable.home_pressed, R.drawable
                 .home_selected, TAG_PAGE_HOME));
         mNavigateTabBar.addTab(LiveFragment.class, new NavigateTabBar.TabParam(R.drawable.live_pressed, R.drawable
                 .live_selected, TAG_PAGE_LIVE));
-        mNavigateTabBar.addTab(VideoFragment.class, new NavigateTabBar.TabParam(R.drawable.follow_pressed,
-                R.drawable.follow_selected, TAG_PAGE_VIDEO));
-        mNavigateTabBar.addTab(FollowFragment.class, new NavigateTabBar.TabParam(R.drawable.video,
-                R.drawable.video_selected, TAG_PAGE_FOLLOW));
+        mNavigateTabBar.addTab(FollowFragment.class, new NavigateTabBar.TabParam(R.drawable.follow_pressed, R.drawable
+                .follow_selected, TAG_PAGE_VIDEO));
+        mNavigateTabBar.addTab(VideoFragment.class, new NavigateTabBar.TabParam(R.drawable.video, R.drawable
+                .video_selected, TAG_PAGE_FOLLOW));
         mNavigateTabBar.addTab(UserFragment.class, new NavigateTabBar.TabParam(R.drawable.user_pressed, R.drawable
                 .user_selected, TAG_PAGE_USER));
-
 
         mNavigateTabBar.setTabSelectListener(this);
     }

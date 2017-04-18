@@ -42,14 +42,10 @@ import master.flame.danmaku.ui.widget.DanmakuView;
 import static com.utouu.douyudemo.R.id.iv_control_img;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：   PC直播播放页
- * 备注消息：
- * 修改时间：2017/2/10 上午11:16
- **/
+ * Create by 黄思程 on 2017/4/18  13:09
+ * Function：
+ * Desc：电脑直播页播放界面
+ */
 public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogic, CommonPcLiveVideoPresenterImp> implements CommonPcLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnErrorListener {
 
