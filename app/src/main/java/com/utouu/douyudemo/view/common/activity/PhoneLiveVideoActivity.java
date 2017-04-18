@@ -38,36 +38,24 @@ import io.vov.vitamio.widget.VideoView;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
 /**
- * 作者：gaoyin
- * 电话：18810474975
- * 邮箱：18810474975@163.com
- * 版本号：1.0
- * 类描述：   手机直播播放页
- * 备注消息：
- * 修改时间：2017/2/10 上午11:16
- **/
-public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoModelLogic, CommonPhoneLiveVideoPresenterImp> implements CommonPhoneLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnErrorListener {
+ * Create by 黄思程 on 2017/4/18  12:00
+ * Function：
+ * Desc：手机直播播放页
+ */
+public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoModelLogic, CommonPhoneLiveVideoPresenterImp>
+        implements CommonPhoneLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnErrorListener {
 
-    @BindView(R.id.vm_videoview)
-    VideoView vmVideoview;
-    @BindView(R.id.im_logo)
-    ImageView imLogo;
-    @BindView(R.id.lv_playloading)
-    LoadingView lvPlayloading;
-    @BindView(R.id.fl_loading)
-    FrameLayout flLoading;
-    @BindView(R.id.iv_control_img)
-    ImageView ivControlImg;
-    @BindView(R.id.tv_control_name)
-    TextView tvControlName;
-    @BindView(R.id.tv_control)
-    TextView tvControl;
-    @BindView(R.id.control_center)
-    RelativeLayout controlCenter;
-    @BindView(R.id.tv_loading_buffer)
-    TextView tvLoadingBuffer;
-    @BindView(R.id.danmakuView)
-    DanmakuView danmakuView;
+    @BindView(R.id.vm_videoview) VideoView vmVideoview;
+    @BindView(R.id.im_logo) ImageView imLogo;
+    @BindView(R.id.lv_playloading) LoadingView lvPlayloading;
+    @BindView(R.id.fl_loading) FrameLayout flLoading;
+    @BindView(R.id.iv_control_img) ImageView ivControlImg;
+    @BindView(R.id.tv_control_name) TextView tvControlName;
+    @BindView(R.id.tv_control) TextView tvControl;
+    @BindView(R.id.control_center) RelativeLayout controlCenter;
+    @BindView(R.id.tv_loading_buffer) TextView tvLoadingBuffer;
+    @BindView(R.id.danmakuView) DanmakuView danmakuView;
+
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
     private String Room_id;
@@ -210,12 +198,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
 
     @Override
     public void getViewPhoneLiveVideoInfo(OldLiveVideoInfo mLiveVideoInfo) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                videoInfo = mLiveVideoInfo;
-                getViewInfo(mLiveVideoInfo);
-            }
+        runOnUiThread(() -> {
+            videoInfo = mLiveVideoInfo;
+            getViewInfo(mLiveVideoInfo);
         });
     }
 
@@ -232,15 +217,12 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                  */
                 vmVideoview.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);
                 vmVideoview.requestFocus();
-                vmVideoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        // optional need Vitamio 4.0
-                        mediaPlayer.setPlaybackSpeed(1.0f);
-                        flLoading.setVisibility(View.GONE);
+                vmVideoview.setOnPreparedListener(mediaPlayer -> {
+                    // optional need Vitamio 4.0
+                    mediaPlayer.setPlaybackSpeed(1.0f);
+                    flLoading.setVisibility(View.GONE);
 //                    vmVideoview.setBackgroundResource(0);
-                        mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
-                    }
+                    mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
                 });
             }
         }
@@ -248,12 +230,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
 
     @Override
     public void showErrorWithStatus(String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                svProgressHUD.showErrorWithStatus("主播还在赶来的路上~~");
-            }
-        });
+        runOnUiThread(() -> svProgressHUD.showErrorWithStatus("主播还在赶来的路上~~"));
     }
 
     /**
