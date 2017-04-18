@@ -52,27 +52,48 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
         implements CommonPcLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnErrorListener {
 
-    @BindView(R.id.vm_videoview) VideoView vmVideoview;
-    @BindView(R.id.fl_loading) FrameLayout flLoading;
-    @BindView(R.id.danmakuView) DanmakuView danmakuView;
-    @BindView(R.id.iv_back) ImageView ivBack;
-    @BindView(R.id.tv_live_nickname) TextView tvLiveNickname;
-    @BindView(R.id.iv_live_setting) ImageView ivLiveSetting;
-    @BindView(R.id.iv_live_gift) ImageView ivLiveGift;
-    @BindView(R.id.iv_live_share) ImageView ivLiveShare;
-    @BindView(R.id.iv_live_follow) ImageView ivLiveFollow;
-    @BindView(R.id.control_top) RelativeLayout controlTop;
-    @BindView(R.id.iv_live_play) ImageView ivLivePlay;
-    @BindView(R.id.iv_live_refresh) ImageView ivLiveRefresh;
-    @BindView(R.id.control_bottom) RelativeLayout controlBottom;
-    @BindView(R.id.im_logo) ImageView imLogo;
-    @BindView(R.id.lv_playloading) LoadingView lvPlayloading;
-    @BindView(iv_control_img) ImageView ivControlImg;
-    @BindView(R.id.tv_control_name) TextView tvControlName;
-    @BindView(R.id.tv_control) TextView tvControl;
-    @BindView(R.id.control_center) RelativeLayout controlCenter;
-    @BindView(R.id.im_danmu_control) ImageView imDanmuControl;
-    @BindView(R.id.tv_loading_buffer) TextView tvLoadingBuffer;
+    @BindView(R.id.vm_videoview)
+    VideoView vmVideoview;
+    @BindView(R.id.fl_loading)
+    FrameLayout flLoading;
+    @BindView(R.id.danmakuView)
+    DanmakuView danmakuView;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.tv_live_nickname)
+    TextView tvLiveNickname;
+    @BindView(R.id.iv_live_setting)
+    ImageView ivLiveSetting;
+    @BindView(R.id.iv_live_gift)
+    ImageView ivLiveGift;
+    @BindView(R.id.iv_live_share)
+    ImageView ivLiveShare;
+    @BindView(R.id.iv_live_follow)
+    ImageView ivLiveFollow;
+    @BindView(R.id.control_top)
+    RelativeLayout controlTop;
+    @BindView(R.id.iv_live_play)
+    ImageView ivLivePlay;
+    @BindView(R.id.iv_live_refresh)
+    ImageView ivLiveRefresh;
+    @BindView(R.id.control_bottom)
+    RelativeLayout controlBottom;
+    @BindView(R.id.im_logo)
+    ImageView imLogo;
+    @BindView(R.id.lv_playloading)
+    LoadingView lvPlayloading;
+    @BindView(iv_control_img)
+    ImageView ivControlImg;
+    @BindView(R.id.tv_control_name)
+    TextView tvControlName;
+    @BindView(R.id.tv_control)
+    TextView tvControl;
+    @BindView(R.id.control_center)
+    RelativeLayout controlCenter;
+    @BindView(R.id.im_danmu_control)
+    ImageView imDanmuControl;
+    @BindView(R.id.tv_loading_buffer)
+    TextView tvLoadingBuffer;
 
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
@@ -338,10 +359,10 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
     private void getViewInfo(OldLiveVideoInfo mLiveVideoInfo) {
         String url = mLiveVideoInfo.getData().getLive_url();
         Uri uri = Uri.parse(url);
-        if(tvLiveNickname!=null) {
+        if (tvLiveNickname != null) {
             tvLiveNickname.setText(mLiveVideoInfo.getData().getRoom_name());
         }
-        if(vmVideoview!=null) {
+        if (vmVideoview != null) {
             vmVideoview.setVideoURI(uri);
             vmVideoview.setBufferSize(1024 * 1024 * 2);
             vmVideoview.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);
@@ -394,7 +415,7 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
         flLoading.setVisibility(View.VISIBLE);
         if (vmVideoview.isPlaying())
             vmVideoview.pause();
-        tvLoadingBuffer.setText("直播已缓冲"+percent+"%...");
+        tvLoadingBuffer.setText("直播已缓冲" + percent + "%...");
     }
 
     @Override

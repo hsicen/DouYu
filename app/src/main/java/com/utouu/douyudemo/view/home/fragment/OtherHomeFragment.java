@@ -41,7 +41,8 @@ import butterknife.BindView;
  * 备注消息：首页 列表页  显示 手游,娱乐,游戏,趣玩等!
  * 修改时间：2016/12/14 下午8:17
  **/
-public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCatePresenterImp> implements HomeCateContract.View, ViewPager.OnPageChangeListener {
+public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCatePresenterImp>
+        implements HomeCateContract.View, ViewPager.OnPageChangeListener {
     /**
      * 导航栏 分页
      */
@@ -97,15 +98,12 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
             @Override
             public void onRefresh() {
 //                延迟500毫秒, 原因 用户体验好 !!!
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Bundle arguments = getArguments();
-                        mHomeCate = (HomeCateList) arguments.getSerializable("homecatelist");
-                        String show_order = arguments.getString("type");
-                        if (show_order.equals(mHomeCate.getShow_order())) {
-                            mPresenter.getHomeCateRefresh(mHomeCate.getIdentification());
-                        }
+                new Handler().postDelayed(() -> {
+                    Bundle arguments = getArguments();
+                    mHomeCate = (HomeCateList) arguments.getSerializable("homecatelist");
+                    String show_order = arguments.getString("type");
+                    if (show_order.equals(mHomeCate.getShow_order())) {
+                        mPresenter.getHomeCateRefresh(mHomeCate.getIdentification());
                     }
                 }, 500);
             }
@@ -197,7 +195,7 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
     }
 
     private void getOtherColumnView(List<HomeRecommendHotCate> homeCates) {
-        List<HomeRecommendHotCate> homeRecommendHotCates = new ArrayList<HomeRecommendHotCate>();
+        List<HomeRecommendHotCate> homeRecommendHotCates = new ArrayList<>();
         homeRecommendHotCates.addAll(homeCates);
         for (int i = 0; i < homeRecommendHotCates.size(); i++) {
             if (homeRecommendHotCates.get(i).getRoom_list().size() < 4) {

@@ -42,6 +42,11 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
+    }
+
+    @Override
     protected void lazyFetchData() {
 
     }

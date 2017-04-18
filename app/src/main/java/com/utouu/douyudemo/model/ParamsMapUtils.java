@@ -44,7 +44,7 @@ public class ParamsMapUtils extends BaseParamsMapUtil {
 
     public static Map<String, String> getHomeCarousel() {
         mapparam = getDefaultParams();
-        mapparam.put("version", "2.421");
+        mapparam.put("version", "2.481");
         return mapparam;
     }
     /**

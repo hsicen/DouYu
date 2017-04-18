@@ -32,6 +32,6 @@ public class HomeCateModelLogic  implements HomeCateContract.Model {
                 .builder(HomeApi.class)
                 .getHomeCate(ParamsMapUtils.getHomeCate(identification))
 //               进行预处理
-                .compose(new DefaultTransformer<List<HomeRecommendHotCate>>());
+                .compose(new DefaultTransformer<>());
     }
 }
