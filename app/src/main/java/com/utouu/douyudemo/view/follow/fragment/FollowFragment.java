@@ -6,6 +6,7 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
+import com.utouu.douyudemo.view.LoadDataView;
 
 /**
  * 作者：gaoyin
@@ -38,6 +39,11 @@ public class FollowFragment extends BaseFragment {
     @Override
     protected BaseView getViewImp() {
         return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

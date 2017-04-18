@@ -16,6 +16,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeCateList;
 import com.utouu.douyudemo.presenter.home.impl.HomeCateListPresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeCateListContract;
 import com.utouu.douyudemo.utils.ToastUtils;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.home.adapter.HomeAllListAdapter;
 
 import java.util.Arrays;
@@ -68,6 +69,11 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

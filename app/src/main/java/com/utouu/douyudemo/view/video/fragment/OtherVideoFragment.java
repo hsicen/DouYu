@@ -14,6 +14,7 @@ import com.utouu.douyudemo.model.logic.video.bean.VideoCateList;
 import com.utouu.douyudemo.model.logic.video.bean.VideoReClassify;
 import com.utouu.douyudemo.presenter.video.impl.VideoOtherCatePresenterImpl;
 import com.utouu.douyudemo.presenter.video.interfaces.VideoOtherCateContract;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.video.adapter.VideoReClassifyListAdapter;
 
 import java.util.ArrayList;
@@ -72,6 +73,11 @@ public class OtherVideoFragment extends BaseFragment<VideoOtherCateListLogic, Vi
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

@@ -15,6 +15,8 @@ import com.utouu.douyudemo.model.logic.live.bean.LiveOtherColumn;
 import com.utouu.douyudemo.model.logic.live.bean.LiveOtherTwoColumn;
 import com.utouu.douyudemo.presenter.live.impl.LiveOtherTwoColumnPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveOtherTwoColumnContract;
+import com.utouu.douyudemo.utils.ViewStatus;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.live.adapter.LiveOtherTwoCloumnAdapter;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
 
 
     private List<LiveOtherTwoColumn> mLiveOtherTwoColumn;
+    private LoadDataView mLoadView;
 
     public static LiveOtherColumnFragment getInstance(LiveOtherColumn mLiveOtherColumn, int position) {
         LiveOtherColumnFragment rf = new LiveOtherColumnFragment();
@@ -113,7 +116,24 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
     }
 
     @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+        this.mLoadView = mLoadView;
+        mLoadView.setErrorListner(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoadView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lazyFetchData();
+                    }
+                }, 100);
+            }
+        });
+    }
+
+    @Override
     protected void lazyFetchData() {
+        mLoadView.changeStatusView(ViewStatus.START);
         Bundle arguments = getArguments();
         LiveOtherColumn mLiveOtherColumn = (LiveOtherColumn) arguments.getSerializable("mLiveOtherColumn");
         mPresenter.getPresenterLiveOtherTwoColumn(mLiveOtherColumn.getShort_name());
@@ -122,6 +142,7 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
 
     @Override
     public void showErrorWithStatus(String msg) {
+        mLoadView.changeStatusView(ViewStatus.FAILURE);
     }
 
     /**
@@ -131,6 +152,11 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
      */
     @Override
     public void getViewLiveOtherTwoColumn(List<LiveOtherTwoColumn> mLiveOtherTwoCloumn) {
+        if (mLiveOtherTwoCloumn != null) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         String[] mTitle = new String[mLiveOtherTwoCloumn.size()];
         for (int i = 0; i < mLiveOtherTwoCloumn.size(); i++) {
             mTitle[i] = mLiveOtherTwoCloumn.get(i).getTag_name();

@@ -13,6 +13,8 @@ import com.utouu.douyudemo.model.logic.live.bean.LiveAllList;
 import com.utouu.douyudemo.presenter.live.impl.LiveAllListPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveAllListContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.utils.ViewStatus;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.live.adapter.LiveAllListAdapter;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     @BindView(R.id.livealllist_content_recyclerview)
     RecyclerView liveAllListContentRecyclerView;
     private LiveAllListAdapter mLiveAllListAdapter;
+    private LoadDataView mLoadView;
 
     public static LiveAllColumnFragment getInstance() {
         return new LiveAllColumnFragment();
@@ -107,7 +110,13 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
     }
 
     @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+        this.mLoadView = mLoadView;
+    }
+
+    @Override
     protected void lazyFetchData() {
+        mLoadView.changeStatusView(ViewStatus.START);
         refresh();
     }
     @Override
@@ -115,6 +124,7 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
         if (refreshContent != null) {
             refreshContent.stopRefresh();
         }
+        mLoadView.changeStatusView(ViewStatus.SUCCESS);
         mLiveAllListAdapter.getLiveAllList(mLiveAllList);
     }
     @Override
@@ -122,6 +132,7 @@ public class LiveAllColumnFragment extends BaseFragment<LiveAllListModelLogic, L
         if (refreshContent != null) {
              refreshContent.stopLoadMore();
         }
+        mLoadView.changeStatusView(ViewStatus.SUCCESS);
         mLiveAllListAdapter.getLiveAllListLoadMore(mLiveAllList);
     }
     @Override

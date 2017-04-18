@@ -14,6 +14,7 @@ import com.utouu.douyudemo.model.logic.video.bean.VideoReClassify;
 import com.utouu.douyudemo.presenter.video.impl.VideoOtherTwoColumnPresenterImp;
 import com.utouu.douyudemo.presenter.video.interfaces.VideoOtherTwoColumnContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.home.adapter.FullyGridLayoutManager;
 import com.utouu.douyudemo.view.video.adapter.VideoOtherColumnListAdapter;
 
@@ -133,6 +134,11 @@ public class VideoOtherTwoColumnFragment extends BaseFragment<VideoTwoColumnMode
     protected BaseView getViewImp() {
         Bundle arguments = getArguments();
         return mVideoOtherTwoColumnFragment.get(arguments.getInt("position"));
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

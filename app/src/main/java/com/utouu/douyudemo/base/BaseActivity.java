@@ -3,9 +3,12 @@ package com.utouu.douyudemo.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import com.utouu.douyudemo.model.ContractProxy;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.utouu.douyudemo.model.ContractProxy;
+import com.utouu.douyudemo.view.LoadDataView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +26,7 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
     //    定义Presenter
     protected P mPresenter;
     protected Unbinder unbinder;
+    private LoadDataView mLoadView;
 
     //    获取布局资源文件
     protected abstract int getLayoutId();
@@ -48,6 +52,8 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
         return (Class<P>) ContractProxy.getPresnterClazz(getClass(), 1);
     }
 
+    protected abstract ViewGroup loadDataViewLayout();
+    protected abstract void getLoadView(LoadDataView loadView);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,7 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
             setContentView(getLayoutId());
 //            注解绑定
             unbinder = ButterKnife.bind(this);
+            initViewGroup();
             bindMVP();
             onInitView(savedInstanceState);
             onEvent();
@@ -92,7 +99,24 @@ public abstract class BaseActivity<M extends BaseModel, P extends BasePresenter>
             mPresenter.mContext = this;
         }
     }
-
+    /**
+     * 嵌入loaddataview
+     */
+    private void initViewGroup() {
+        ViewGroup view = loadDataViewLayout();
+        if (null != view) {
+            ViewGroup viewGroup = (ViewGroup) view.getParent();
+            if (viewGroup != null) {
+                viewGroup.removeView(view);
+                this.mLoadView = new LoadDataView(this, view);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                params.addRule(RelativeLayout.BELOW, R.id.include_topbar);// TODO: 2017/4/17
+                params.setMargins(0, 0, 0, 0);
+                viewGroup.addView(this.mLoadView, params);
+                getLoadView(this.mLoadView);
+            }
+        }
+    }
     /**
      * activity摧毁
      */

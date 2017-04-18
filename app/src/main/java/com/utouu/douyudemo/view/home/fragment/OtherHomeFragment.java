@@ -21,6 +21,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.presenter.home.impl.HomeCatePresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeCateContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.home.adapter.HomeNgBarAdapter;
 import com.utouu.douyudemo.view.home.adapter.HomeNgBarViewPagerAdapter;
 import com.utouu.douyudemo.view.home.adapter.HomeOtherAdapter;
@@ -125,6 +126,11 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
 //        Bundle arguments = getArguments();
 //        return mOtherHomeFraments.get(arguments.getInt("position"));
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     final RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool() {

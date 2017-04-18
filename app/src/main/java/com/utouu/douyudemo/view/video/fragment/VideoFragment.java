@@ -12,6 +12,7 @@ import com.utouu.douyudemo.model.logic.video.bean.VideoCateList;
 import com.utouu.douyudemo.model.logic.video.VideoCateListLogic;
 import com.utouu.douyudemo.presenter.video.impl.VideoCateListPresenterImpl;
 import com.utouu.douyudemo.presenter.video.interfaces.VideoAllCateListContract;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.video.adapter.VideoAllListAdapter;
 
 import java.util.List;
@@ -56,6 +57,11 @@ public class VideoFragment extends BaseFragment<VideoCateListLogic, VideoCateLis
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override
