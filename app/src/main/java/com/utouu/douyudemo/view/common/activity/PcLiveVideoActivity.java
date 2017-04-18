@@ -11,6 +11,7 @@ import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -29,6 +30,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.presenter.common.impl.CommonPcLiveVideoPresenterImp;
 import com.utouu.douyudemo.presenter.common.interfaces.CommonPcLiveVideoContract;
 import com.utouu.douyudemo.ui.loadplay.LoadingView;
+import com.utouu.douyudemo.view.LoadDataView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -189,6 +191,16 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
     @Override
     protected BaseView getView() {
         return this;
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 
     @Override

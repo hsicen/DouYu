@@ -14,6 +14,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeColumnMoreOtherList;
 import com.utouu.douyudemo.presenter.home.impl.HomeColumnMoreOtherListPresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeColumnMoreOtherListContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.home.adapter.HomeColumnMoreOtherListAdapter;
 
 import java.util.List;
@@ -123,6 +124,11 @@ public class HomeColumnMoreOtherListFragment extends BaseFragment<HomeColumnMore
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

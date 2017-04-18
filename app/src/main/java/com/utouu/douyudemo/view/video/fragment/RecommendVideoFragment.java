@@ -16,6 +16,7 @@ import com.utouu.douyudemo.model.logic.video.VideoRecommendModelLogic;
 import com.utouu.douyudemo.presenter.video.impl.VideoRecommendPresenterImp;
 import com.utouu.douyudemo.presenter.video.interfaces.VideoRerecommendContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.home.adapter.HomeCarouselAdapter;
 import com.utouu.douyudemo.view.video.adapter.VideoRecommendAdapter;
 
@@ -101,6 +102,11 @@ public class RecommendVideoFragment extends BaseFragment<VideoRecommendModelLogi
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

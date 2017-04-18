@@ -25,6 +25,7 @@ import com.utouu.douyudemo.presenter.home.impl.HomeRecommendPresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeRecommendContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
 import com.utouu.douyudemo.utils.ToastUtils;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
 import com.utouu.douyudemo.view.home.adapter.HomeCarouselAdapter;
 import com.utouu.douyudemo.view.home.adapter.HomeRecommendAdapter;
@@ -137,6 +138,11 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     /**

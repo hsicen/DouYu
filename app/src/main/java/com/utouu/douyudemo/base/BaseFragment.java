@@ -7,8 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.utouu.douyudemo.model.ContractProxy;
 import com.trello.rxlifecycle.components.support.RxFragment;
+import com.utouu.douyudemo.model.ContractProxy;
+import com.utouu.douyudemo.view.LoadDataView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,6 +32,7 @@ public abstract class BaseFragment<M extends  BaseModel,P extends BasePresenter>
 
     //    定义Presenter
     protected  P mPresenter;
+    private LoadDataView mLoadView;
 
     //    获取布局资源文件
     protected  abstract  int getLayoutId();
@@ -53,6 +55,9 @@ public abstract class BaseFragment<M extends  BaseModel,P extends BasePresenter>
     protected    Class getPresenterClazz()  {
         return (Class<P>)ContractProxy.getPresnterClazz(getClass(), 1);
     }
+
+    protected abstract void getLoadView(LoadDataView mLoadView);
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +66,8 @@ public abstract class BaseFragment<M extends  BaseModel,P extends BasePresenter>
             if (parent != null) {
                 parent.removeView(rootView);
             }
-            return rootView;
+            mLoadView = new LoadDataView(getActivity(), rootView);
+            return mLoadView;
         }
         if (getLayoutId() != 0) {
             rootView = inflater.inflate(getLayoutId(),container, false);
@@ -69,9 +75,10 @@ public abstract class BaseFragment<M extends  BaseModel,P extends BasePresenter>
             rootView = super.onCreateView(inflater, container, savedInstanceState);
         }
         unbinder= ButterKnife.bind(this, rootView);
+        mLoadView = new LoadDataView(getActivity(), rootView);
         bindMVP();
         onInitView(savedInstanceState);
-        return rootView;
+        return mLoadView;
     }
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -130,6 +137,7 @@ public abstract class BaseFragment<M extends  BaseModel,P extends BasePresenter>
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getLoadView(mLoadView);
         isViewPrepared = true;
         lazyFetchDataIfPrepared();
         if(mPresenter==null)

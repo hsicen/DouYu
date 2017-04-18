@@ -11,6 +11,7 @@ import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.presenter.common.impl.CommonPhoneLiveVideoPresenterImp;
 import com.utouu.douyudemo.presenter.common.interfaces.CommonPhoneLiveVideoContract;
 import com.utouu.douyudemo.ui.loadplay.LoadingView;
+import com.utouu.douyudemo.view.LoadDataView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -194,6 +196,16 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     @Override
     protected BaseView getView() {
         return this;
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 
     @Override

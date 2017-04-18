@@ -25,6 +25,7 @@ import com.utouu.douyudemo.model.logic.me.bean.PersonInfoBean;
 import com.utouu.douyudemo.presenter.me.impl.MePresenterImpl;
 import com.utouu.douyudemo.presenter.me.interfaces.MeContract;
 import com.utouu.douyudemo.ui.popup.LoginPopWindow;
+import com.utouu.douyudemo.view.LoadDataView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -110,6 +111,11 @@ public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> i
     @Override
     protected BaseView getViewImp() {
         return this;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
     }
 
     @Override

@@ -41,4 +41,11 @@
     <string name="dy_login">斗鱼账号登录</string>
     <string name="wb_login">微博登录</string>
     <string name="qq_login">QQ登录</string>
+
+    <!--网络请求状态-->
+    <string name="net_error">喔，出错了~</string>
+    <string name="no_data">暂无数据~</string>
+    <string name="web_error">服务器出错了~</string>
+    <string name="net_error_go">请连接到网络，然后再试一次</string>
+    <string name="try_again">重新加载</string>
 </resources>

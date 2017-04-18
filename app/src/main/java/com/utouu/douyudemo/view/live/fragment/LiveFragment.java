@@ -2,6 +2,7 @@ package com.utouu.douyudemo.view.live.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -12,6 +13,8 @@ import com.utouu.douyudemo.model.logic.live.LiveOtherColumnModelLogic;
 import com.utouu.douyudemo.model.logic.live.bean.LiveOtherColumn;
 import com.utouu.douyudemo.presenter.live.impl.LiveOtherColumnPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveOtherColumnContract;
+import com.utouu.douyudemo.utils.ViewStatus;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.live.adapter.LiveAllColumnAdapter;
 
 import java.util.List;
@@ -30,6 +33,7 @@ public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOt
     SlidingTabLayout liveSlidingTab;
     @BindView(R.id.live_viewpager)
     ViewPager liveViewpager;
+    private LoadDataView mLoadView;
 
 
     @Override
@@ -53,17 +57,34 @@ public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOt
         return this;
     }
 
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+        this.mLoadView = mLoadView;
+        mLoadView.setErrorListner(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoadView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lazyFetchData();
+                    }
+                }, 100);
+            }
+        });
+    }
+
     /**
      * 懒加载
      */
     @Override
     protected void lazyFetchData() {
+        mLoadView.changeStatusView(ViewStatus.START);
         mPresenter.getPresenterLiveOtherColumn();
     }
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        mLoadView.changeStatusView(ViewStatus.NOTNETWORK);
     }
 
     /**
@@ -73,6 +94,12 @@ public class LiveFragment extends BaseFragment<LiveOtherColumnModelLogic, LiveOt
      */
     @Override
     public void getViewLiveOtherColumn(List<LiveOtherColumn> mLiveOtherColumns) {
+
+        if (mLiveOtherColumns != null) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         String[] mTitle = new String[mLiveOtherColumns.size() + 3];
         mTitle[0] = "常用";
         mTitle[1] = "全部";

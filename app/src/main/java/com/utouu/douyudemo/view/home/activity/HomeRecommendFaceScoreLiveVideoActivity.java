@@ -1,9 +1,11 @@
 package com.utouu.douyudemo.view.home.activity;
 
 import android.os.Bundle;
+import android.view.ViewGroup;
 
 import com.utouu.douyudemo.base.BaseActivity;
 import com.utouu.douyudemo.base.BaseView;
+import com.utouu.douyudemo.view.LoadDataView;
 
 /**
  *  作者：gaoyin
@@ -32,5 +34,15 @@ public class HomeRecommendFaceScoreLiveVideoActivity extends BaseActivity {
     @Override
     protected BaseView getView() {
         return null;
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
     }
 }

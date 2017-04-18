@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
@@ -14,6 +15,8 @@ import com.utouu.douyudemo.model.logic.live.bean.LiveOtherTwoColumn;
 import com.utouu.douyudemo.presenter.live.impl.LiveOtherColumnListPresenterImp;
 import com.utouu.douyudemo.presenter.live.interfaces.LiveOtherColumnListContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
+import com.utouu.douyudemo.utils.ViewStatus;
+import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.live.adapter.LiveFaceScoreColumnListAdapter;
 import com.utouu.douyudemo.view.live.adapter.LiveOtherColumnListAdapter;
 
@@ -47,6 +50,8 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
     private LiveOtherColumnListAdapter mLiveOtherColumnListAdapter;
     private LiveOtherTwoColumn mLiveOtherTwoColumn;
     private LiveFaceScoreColumnListAdapter mLiveFaceScoreColumnListAdapter;
+    private LoadDataView mLoadView;
+
     public static LiveOtherTwoColumnFragment getInstance() {
         LiveOtherTwoColumnFragment rf = new LiveOtherTwoColumnFragment();
         return rf;
@@ -160,7 +165,24 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
     }
 
     @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+        this.mLoadView = mLoadView;
+        mLoadView.setErrorListner(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoadView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lazyFetchData();
+                    }
+                }, 100);
+            }
+        });
+    }
+
+    @Override
     protected void lazyFetchData() {
+        mLoadView.changeStatusView(ViewStatus.START);
         mLiveOtherTwoColumn = new LiveOtherTwoColumn();
         Bundle arguments = getArguments();
         mLiveOtherTwoColumn = (LiveOtherTwoColumn) arguments.getSerializable("mLiveOtherTwoColumn");
@@ -174,6 +196,11 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
 
     @Override
     public void getViewLiveOtherColumnList(List<LiveOtherList> mLiveAllList) {
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         if (rtefreshContent != null) {
             rtefreshContent.stopRefresh();
         }
@@ -182,7 +209,11 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
 
     @Override
     public void getViewLiveOtherColumnListLoadMore(List<LiveOtherList> mLiveAllList) {
-
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         if (rtefreshContent != null) {
             rtefreshContent.stopLoadMore();
         }
@@ -191,6 +222,11 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
 
     @Override
     public void getViewLiveFaceScoreColumnList(List<LiveOtherList> mLiveAllList) {
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         if (rtefreshContent != null) {
             rtefreshContent.stopRefresh();
         }
@@ -200,6 +236,11 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
 
     @Override
     public void getViewLiveFaceScoreColumnListLoadMore(List<LiveOtherList> mLiveAllList) {
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
+            mLoadView.changeStatusView(ViewStatus.SUCCESS);
+        } else {
+            mLoadView.changeStatusView(ViewStatus.EMPTY);
+        }
         if (rtefreshContent != null) {
             rtefreshContent.stopLoadMore();
         }
@@ -208,6 +249,7 @@ public class LiveOtherTwoColumnFragment extends BaseFragment<LiveOtherColumnList
 
     @Override
     public void showErrorWithStatus(String msg) {
+        mLoadView.changeStatusView(ViewStatus.NOTNETWORK);
         if (rtefreshContent != null) {
             rtefreshContent.stopLoadMore();
             rtefreshContent.stopRefresh();
