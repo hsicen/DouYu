@@ -46,51 +46,32 @@ import static com.utouu.douyudemo.R.id.iv_control_img;
  * Function：
  * Desc：电脑直播页播放界面
  */
-public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogic, CommonPcLiveVideoPresenterImp> implements CommonPcLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener,
+public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogic, CommonPcLiveVideoPresenterImp>
+        implements CommonPcLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnErrorListener {
 
-    @BindView(R.id.vm_videoview)
-    VideoView vmVideoview;
-    @BindView(R.id.fl_loading)
-    FrameLayout flLoading;
-    @BindView(R.id.danmakuView)
-    DanmakuView danmakuView;
-    @BindView(R.id.iv_back)
-    ImageView ivBack;
-    @BindView(R.id.tv_live_nickname)
-    TextView tvLiveNickname;
-    @BindView(R.id.iv_live_setting)
-    ImageView ivLiveSetting;
-    @BindView(R.id.iv_live_gift)
-    ImageView ivLiveGift;
-    @BindView(R.id.iv_live_share)
-    ImageView ivLiveShare;
-    @BindView(R.id.iv_live_follow)
-    ImageView ivLiveFollow;
-    @BindView(R.id.control_top)
-    RelativeLayout controlTop;
-    @BindView(R.id.iv_live_play)
-    ImageView ivLivePlay;
-    @BindView(R.id.iv_live_refresh)
-    ImageView ivLiveRefresh;
-    @BindView(R.id.control_bottom)
-    RelativeLayout controlBottom;
-    @BindView(R.id.im_logo)
-    ImageView imLogo;
-    @BindView(R.id.lv_playloading)
-    LoadingView lvPlayloading;
-    @BindView(iv_control_img)
-    ImageView ivControlImg;
-    @BindView(R.id.tv_control_name)
-    TextView tvControlName;
-    @BindView(R.id.tv_control)
-    TextView tvControl;
-    @BindView(R.id.control_center)
-    RelativeLayout controlCenter;
-    @BindView(R.id.im_danmu_control)
-    ImageView imDanmuControl;
-    @BindView(R.id.tv_loading_buffer)
-    TextView tvLoadingBuffer;
+    @BindView(R.id.vm_videoview) VideoView vmVideoview;
+    @BindView(R.id.fl_loading) FrameLayout flLoading;
+    @BindView(R.id.danmakuView) DanmakuView danmakuView;
+    @BindView(R.id.iv_back) ImageView ivBack;
+    @BindView(R.id.tv_live_nickname) TextView tvLiveNickname;
+    @BindView(R.id.iv_live_setting) ImageView ivLiveSetting;
+    @BindView(R.id.iv_live_gift) ImageView ivLiveGift;
+    @BindView(R.id.iv_live_share) ImageView ivLiveShare;
+    @BindView(R.id.iv_live_follow) ImageView ivLiveFollow;
+    @BindView(R.id.control_top) RelativeLayout controlTop;
+    @BindView(R.id.iv_live_play) ImageView ivLivePlay;
+    @BindView(R.id.iv_live_refresh) ImageView ivLiveRefresh;
+    @BindView(R.id.control_bottom) RelativeLayout controlBottom;
+    @BindView(R.id.im_logo) ImageView imLogo;
+    @BindView(R.id.lv_playloading) LoadingView lvPlayloading;
+    @BindView(iv_control_img) ImageView ivControlImg;
+    @BindView(R.id.tv_control_name) TextView tvControlName;
+    @BindView(R.id.tv_control) TextView tvControl;
+    @BindView(R.id.control_center) RelativeLayout controlCenter;
+    @BindView(R.id.im_danmu_control) ImageView imDanmuControl;
+    @BindView(R.id.tv_loading_buffer) TextView tvLoadingBuffer;
+
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
     private String Room_id;
@@ -212,12 +193,9 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
 
     @Override
     public void getViewPcLiveVideoInfo(OldLiveVideoInfo mLiveVideoInfo) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                videoInfo = mLiveVideoInfo;
-                getViewInfo(mLiveVideoInfo);
-            }
+        runOnUiThread(() -> {
+            videoInfo = mLiveVideoInfo;
+            getViewInfo(mLiveVideoInfo);
         });
     }
 
@@ -356,16 +334,13 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
             vmVideoview.setBufferSize(1024 * 1024 * 2);
             vmVideoview.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);
             vmVideoview.requestFocus();
-            vmVideoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    // optional need Vitamio 4.0
-                    mediaPlayer.setPlaybackSpeed(1.0f);
-                    flLoading.setVisibility(View.GONE);
-                    ivLivePlay.setImageResource(R.drawable.img_live_videopause);
-                    mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
+            vmVideoview.setOnPreparedListener(mediaPlayer -> {
+                // optional need Vitamio 4.0
+                mediaPlayer.setPlaybackSpeed(1.0f);
+                flLoading.setVisibility(View.GONE);
+                ivLivePlay.setImageResource(R.drawable.img_live_videopause);
+                mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
 
-                }
             });
         }
     }
@@ -393,12 +368,7 @@ public class PcLiveVideoActivity extends BaseActivity<CommonPcLiveVideoModelLogi
     @Override
     public void showErrorWithStatus(String msg) {
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                svProgressHUD.showErrorWithStatus("主播还在赶来的路上~~");
-            }
-        });
+        runOnUiThread(() -> svProgressHUD.showErrorWithStatus("主播还在赶来的路上~~"));
     }
 
     /**
