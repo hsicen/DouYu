@@ -102,6 +102,7 @@ public class HomeRecommendHotCate {
     }
 
     public static class RoomListEntity implements Serializable {
+
         private String specific_catalog;
         private String vertical_src;
         private String ranktype;

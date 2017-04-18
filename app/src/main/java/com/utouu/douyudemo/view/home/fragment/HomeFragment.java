@@ -1,13 +1,19 @@
 package com.utouu.douyudemo.view.home.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.github.clans.fab.FloatingActionMenu;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
@@ -45,6 +51,7 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
     @BindView(R.id.iv_history) ImageView ivHistory;
     @BindView(R.id.sliding_tab) SlidingTabLayout slidingTab;
     @BindView(R.id.viewpager) ViewPager viewpager;
+    @BindView(R.id.mainFloatButton) FloatingActionMenu mFloatButton;
 
     SVProgressHUD svProgressHUD;
     private List<String> hintText;
@@ -60,6 +67,8 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
                 "初代", "绝地求生", "贝贝", "青春联练习生");
         svProgressHUD = new SVProgressHUD(getActivity());
 
+        mFloatButton.setClosedOnTouchOutside(true);
+        createCustomAnimation();
         changeSearchHint();
     }
     @Override
@@ -127,6 +136,41 @@ public class HomeFragment extends BaseFragment<HomeCateListModelLogic, HomeCateL
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aLong -> etHint.setText(hintText.get((int) (aLong % hintText.size()))));
+    }
+
+    /**
+     * 自定义悬浮按钮动画
+     */
+    public void createCustomAnimation() {
+        AnimatorSet set = new AnimatorSet();
+
+        ObjectAnimator scaleOutX = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleX", 1.0f, 0.2f);
+        ObjectAnimator scaleOutY = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleY", 1.0f, 0.2f);
+        ObjectAnimator alphaOut = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(),"alpha",1.0f,0f);
+
+        ObjectAnimator scaleInX = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleX", 0.2f, 1.0f);
+        ObjectAnimator scaleInY = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleY", 0.2f, 1.0f);
+        ObjectAnimator alphaIn = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(),"alpha",0f,1.0f);
+
+        scaleOutX.setDuration(200);
+        scaleOutY.setDuration(200);
+
+        scaleInX.setDuration(300);
+        scaleInY.setDuration(300);
+
+        scaleInX.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mFloatButton.getMenuIconView().setImageResource(mFloatButton.isOpened()
+                        ? R.drawable.icon_home_menu : R.drawable.icon_menu_camera_live);
+            }
+        });
+
+        set.play(scaleOutX).with(scaleOutY).with(alphaOut);
+        set.play(scaleInX).with(scaleInY).with(alphaIn).after(scaleOutX);
+        set.setInterpolator(new OvershootInterpolator(2));
+
+        mFloatButton.setIconToggleAnimatorSet(set);
     }
 
     @Override

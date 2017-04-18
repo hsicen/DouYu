@@ -78,7 +78,6 @@ public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> i
 
     @Override
     public void showLoginPopWindow() {
-        mLoginPopwindow.showPopupWindow();
         if(mLoginPopwindow!=null)
         mLoginPopwindow.showPopupWindow();
     }

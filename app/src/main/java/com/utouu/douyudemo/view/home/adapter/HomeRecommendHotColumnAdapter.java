@@ -56,24 +56,21 @@ public class HomeRecommendHotColumnAdapter extends RecyclerView.Adapter<Recycler
         {
             holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //                颜值栏目 竖屏播放
-                if(mHomeHotColumn.get(position).getCate_id().equals("201"))
-                {
-                    Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id",mHomeHotColumn.get(position).getRoom_id());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }else {
-                    Intent intent = new Intent(context, PcLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id", mHomeHotColumn.get(position).getRoom_id());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
+        holder.itemView.setOnClickListener(view -> {
+            //                颜值栏目 竖屏播放
+            if(mHomeHotColumn.get(position).getCate_id().equals("201"))
+            {
+                Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Room_id",mHomeHotColumn.get(position).getRoom_id());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }else {
+                Intent intent = new Intent(context, PcLiveVideoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Room_id", mHomeHotColumn.get(position).getRoom_id());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

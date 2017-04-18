@@ -9,23 +9,23 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.utouu.douyudemo.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import razerdp.basepopup.BasePopupWindow;
 
-import static com.utouu.douyudemo.R.id.btn_close_popup;
-
 /**
- * Created by Administrator on 2017/3/17 0017.
+ * Create by 黄思程 on 2017/4/18  11:16 x
+ * Function：
+ * Desc：登录对话框
  */
-
-public class LoginPopWindow extends BasePopupWindow  {
+public class LoginPopWindow extends BasePopupWindow {
 
     @BindView(R.id.tv_login_way)
     TextView tvLoginWay;
-    @BindView(btn_close_popup)
+    @BindView(R.id.btn_close_popup)
     ImageView btnClosePopup;
     @BindView(R.id.tv_login_wx)
     TextView tvLoginWx;
@@ -37,10 +37,10 @@ public class LoginPopWindow extends BasePopupWindow  {
     TextView tvLoDouyu;
     @BindView(R.id.tv_register)
     TextView tvRegister;
-//    @BindView(R.id.ll_login)
-//    LinearLayout llLogin;
-  public LoginPopWindow(Activity context) {
+
+    public LoginPopWindow(Activity context) {
         super(context);
+        Logger.e(">>>>>   登录对话框");
     }
 
     @Override
@@ -69,38 +69,12 @@ public class LoginPopWindow extends BasePopupWindow  {
 
     @Override
     public View initAnimaView() {
-//        btnClosePopup.setOnClickListener(this);
         return null;
     }
 
 
     @OnClick(R.id.btn_close_popup)
-    public void closePopup()
-    {
+    public void closePopup() {
         this.dismiss();
     }
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.tv_login_wx:
-//                mOnItemClickListener.loginByWX();
-//                break;
-//            case R.id.tv_login_qq:
-//                mOnItemClickListener.loginByQQ();
-//                break;
-//            case R.id.tv_login_wb:
-//                mOnItemClickListener.loginByWB();
-//                break;
-//            case R.id.tv_login_douyu:
-//                mOnItemClickListener.loginByDouyu();
-//                break;
-//            case R.id.tv_register:
-//                mOnItemClickListener.registe();
-//            break;
-//          case btn_close_popup:
-//              dismiss();
-//                break;
-//        }
-
-
 }
