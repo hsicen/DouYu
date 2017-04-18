@@ -148,9 +148,9 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
         if (refreshContent != null) {
             refreshContent.stopRefresh();
         }
-        if (mLiveAllList!=null) {
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
             mLoadView.changeStatusView(ViewStatus.SUCCESS);
-        }else {
+        } else {
             mLoadView.changeStatusView(ViewStatus.EMPTY);
         }
         mLiveSportsColumnListAdapter.getLiveLiveSportsColumnList(mLiveAllList);
@@ -158,9 +158,9 @@ public class LiveSportsColumnFragment extends BaseFragment<LiveSportsColumnAllLi
 
     @Override
     public void getViewLiveSportsColumnAllListLoadMore(List<LiveSportsAllList> mLiveAllList) {
-        if (mLiveAllList!=null) {
+        if (mLiveAllList != null && mLiveAllList.size() != 0) {
             mLoadView.changeStatusView(ViewStatus.SUCCESS);
-        }else {
+        } else {
             mLoadView.changeStatusView(ViewStatus.EMPTY);
         }
         if (refreshContent != null) {

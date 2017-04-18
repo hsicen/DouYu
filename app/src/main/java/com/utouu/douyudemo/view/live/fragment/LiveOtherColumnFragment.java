@@ -152,7 +152,7 @@ public class LiveOtherColumnFragment extends BaseFragment<LiveOtherTwoColumnMode
      */
     @Override
     public void getViewLiveOtherTwoColumn(List<LiveOtherTwoColumn> mLiveOtherTwoCloumn) {
-        if (mLiveOtherTwoCloumn != null) {
+        if (mLiveOtherTwoCloumn != null && mLiveOtherTwoCloumn.size() != 0) {
             mLoadView.changeStatusView(ViewStatus.SUCCESS);
         } else {
             mLoadView.changeStatusView(ViewStatus.EMPTY);

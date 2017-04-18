@@ -1,16 +1,12 @@
 package com.utouu.douyudemo.view.live.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
 import com.utouu.douyudemo.view.LoadDataView;
-
-import butterknife.ButterKnife;
 
 /**
  * Create by 李俊鹏 on 2017/4/14 15:46
@@ -65,11 +61,4 @@ public class LiveCommonColumnFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 }
