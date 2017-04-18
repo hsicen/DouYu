@@ -1,17 +1,23 @@
 package com.utouu.douyudemo.view.home.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.github.clans.fab.FloatingActionMenu;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseFragment;
 import com.utouu.douyudemo.base.BaseView;
@@ -51,6 +57,7 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
 
     @BindView(R.id.rtefresh_content) XRefreshView rtefreshContent;
     @BindView(R.id.recommend_content_recyclerview) RecyclerView recommed_recyclerview;
+    @BindView(R.id.mainFloatButton) FloatingActionMenu mFloatButton;
 
     SVProgressHUD svProgressHUD;
     private HomeRecommendAdapter adapter;
@@ -93,10 +100,13 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
         bannerTab = (CommonTabLayout) headView.findViewById(R.id.bannerTab);
         bannerTab.setTabData(mTabEntities);
 
+        mFloatButton.setClosedOnTouchOutside(true);
+
         bannerTab.setOnTabSelectListener(this);
         recommed_banner.setDelegate(this);
         recommed_banner.setAdapter(mRecommedBannerAdapter);
         setXrefeshViewConfig();
+        createCustomAnimation();
     }
     final RecyclerView.RecycledViewPool pool = new RecyclerView.RecycledViewPool() {
         @Override
@@ -226,5 +236,40 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
     public void onTabReselect(int position) {
         int currentTab = bannerTab.getCurrentTab();
         ToastUtils.showShort(mContext,"不要着急，正在开发"+mTitles[currentTab]+"页面");
+    }
+
+    /**
+     * 自定义悬浮按钮动画
+     */
+    public void createCustomAnimation() {
+        AnimatorSet set = new AnimatorSet();
+
+        ObjectAnimator scaleOutX = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleX", 1.0f, 0.2f);
+        ObjectAnimator scaleOutY = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleY", 1.0f, 0.2f);
+        ObjectAnimator alphaOut = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(),"alpha",1.0f,0f);
+
+        ObjectAnimator scaleInX = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleX", 0.2f, 1.0f);
+        ObjectAnimator scaleInY = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(), "scaleY", 0.2f, 1.0f);
+        ObjectAnimator alphaIn = ObjectAnimator.ofFloat(mFloatButton.getMenuIconView(),"alpha",0f,1.0f);
+
+        scaleOutX.setDuration(200);
+        scaleOutY.setDuration(200);
+
+        scaleInX.setDuration(300);
+        scaleInY.setDuration(300);
+
+        scaleInX.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mFloatButton.getMenuIconView().setImageResource(mFloatButton.isOpened()
+                        ? R.drawable.icon_home_menu : R.drawable.icon_menu_camera_live);
+            }
+        });
+
+        set.play(scaleOutX).with(scaleOutY).with(alphaOut);
+        set.play(scaleInX).with(scaleInY).with(alphaIn).after(scaleOutX);
+        set.setInterpolator(new OvershootInterpolator(2));
+
+        mFloatButton.setIconToggleAnimatorSet(set);
     }
 }

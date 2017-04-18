@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.common.activity.MainActivity">
@@ -11,7 +10,8 @@
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/mainTabBar"/>
+        android:layout_above="@+id/mainTabBar" />
+
     <com.utouu.douyudemo.ui.NavigateTabBar
         android:id="@+id/mainTabBar"
         android:layout_width="match_parent"
@@ -21,11 +21,11 @@
         app:containerId="@+id/main_container"
         app:navigateTabSelectedTextColor="@color/comui_tab_select_color"
         app:navigateTabTextColor="@color/comui_tab_text_color"
-        app:navigateTabTextSize="11sp"
-        />
-    <ImageView
+        app:navigateTabTextSize="11sp" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mainTabBar"
-        android:background="@drawable/comui_bar_top_shadow"/>
+        android:background="@drawable/comui_bar_top_shadow" />
 </com.zhy.autolayout.AutoRelativeLayout>
