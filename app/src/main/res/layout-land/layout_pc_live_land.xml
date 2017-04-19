@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--PC直播竖屏界面UI-->
+<!--PC直播横屏屏界面UI-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -139,31 +139,6 @@
 
 
     </RelativeLayout>
-
-    <com.flyco.tablayout.SlidingTabLayout
-        android:id="@+id/tab_pc_portrait"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="#ffffff"
-        app:tl_iconVisible="false"
-        app:tl_indicator_color="#ff7800"
-        app:tl_indicator_corner_radius="3dp"
-        app:tl_indicator_height="2dp"
-        app:tl_indicator_style="NORMAL"
-        app:tl_tab_space_equal="true"
-        app:tl_textSelectColor="#ff7800"
-        app:tl_textsize="14sp" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_pc_portrait"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0.5"
-        android:background="@color/base_line" />
 
     <LinearLayout
         android:id="@+id/input_pc_portrait"
