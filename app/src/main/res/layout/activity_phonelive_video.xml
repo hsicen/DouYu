@@ -2,6 +2,7 @@
 <com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/phone_live"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.common.activity.PhoneLiveVideoActivity"
@@ -16,12 +17,95 @@
             android:id="@+id/vm_videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <!--弹幕-->
-        <master.flame.danmaku.ui.widget.DanmakuView
-            android:id="@+id/danmakuView"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <!--控制层-->
-        <include layout="@layout/layout_phonelive_control" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_quit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/ic_launcher" />
+
+                <ImageView
+                    android:id="@+id/close_vertical_live"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/error" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/vertical_live_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/wh10.0dimens10.0dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_input_word"
+                    android:layout_width="@dimen/wh30.0dimens30.0dp"
+                    android:layout_height="@dimen/wh30.0dimens30.0dp"
+                    android:background="@drawable/user_selected" />
+
+                <ImageView
+                    android:layout_width="@dimen/wh30.0dimens30.0dp"
+                    android:layout_height="@dimen/wh30.0dimens30.0dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/user_selected" />
+
+                <ImageView
+                    android:layout_width="@dimen/wh30.0dimens30.0dp"
+                    android:layout_height="@dimen/wh30.0dimens30.0dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/user_selected" />
+
+                <Space
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/wh30.0dimens30.0dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/btn_live_share_selector" />
+
+            </LinearLayout>
+
+            <!--弹幕-->
+            <master.flame.danmaku.ui.widget.DanmakuView
+                android:id="@+id/danmakuView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_above="@+id/vertical_live_chat" />
+            <!--控制层-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vertical_live_chat"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh200.0dimens200.0dp"
+                android:layout_above="@+id/vertical_live_bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/layout_phonelive_control"
+            android:visibility="gone" />
     </FrameLayout>
 </com.zhy.autolayout.AutoRelativeLayout>

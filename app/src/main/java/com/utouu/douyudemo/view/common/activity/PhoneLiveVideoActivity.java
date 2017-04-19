@@ -1,5 +1,9 @@
 package com.utouu.douyudemo.view.common.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
+import android.app.Service;
 import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -7,14 +11,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,9 +40,11 @@ import com.utouu.douyudemo.presenter.common.impl.CommonPhoneLiveVideoPresenterIm
 import com.utouu.douyudemo.presenter.common.interfaces.CommonPhoneLiveVideoContract;
 import com.utouu.douyudemo.ui.loadplay.LoadingView;
 import com.utouu.douyudemo.view.LoadDataView;
+import com.utouu.douyudemo.view.MyPopupWindow;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.utils.ScreenResolution;
@@ -47,16 +59,38 @@ import master.flame.danmaku.ui.widget.DanmakuView;
 public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoModelLogic, CommonPhoneLiveVideoPresenterImp>
         implements CommonPhoneLiveVideoContract.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnErrorListener {
 
-    @BindView(R.id.vm_videoview) VideoView vmVideoview;
-    @BindView(R.id.im_logo) ImageView imLogo;
-    @BindView(R.id.lv_playloading) LoadingView lvPlayloading;
-    @BindView(R.id.fl_loading) FrameLayout flLoading;
-    @BindView(R.id.iv_control_img) ImageView ivControlImg;
-    @BindView(R.id.tv_control_name) TextView tvControlName;
-    @BindView(R.id.tv_control) TextView tvControl;
-    @BindView(R.id.control_center) RelativeLayout controlCenter;
-    @BindView(R.id.tv_loading_buffer) TextView tvLoadingBuffer;
-    @BindView(R.id.danmakuView) DanmakuView danmakuView;
+    @BindView(R.id.vm_videoview)
+    VideoView vmVideoview;
+    @BindView(R.id.im_logo)
+    ImageView imLogo;
+    @BindView(R.id.lv_playloading)
+    LoadingView lvPlayloading;
+    @BindView(R.id.fl_loading)
+    FrameLayout flLoading;
+    @BindView(R.id.iv_control_img)
+    ImageView ivControlImg;
+    @BindView(R.id.tv_control_name)
+    TextView tvControlName;
+    @BindView(R.id.tv_control)
+    TextView tvControl;
+    @BindView(R.id.control_center)
+    RelativeLayout controlCenter;
+    @BindView(R.id.tv_loading_buffer)
+    TextView tvLoadingBuffer;
+    @BindView(R.id.danmakuView)
+    DanmakuView danmakuView;
+    @BindView(R.id.close_vertical_live)
+    ImageView closeVerticalLive;
+    @BindView(R.id.vertical_live_chat)
+    RecyclerView verticalLiveChat;
+    @BindView(R.id.iv_input_word)
+    ImageView ivInputWord;
+    @BindView(R.id.vertical_live_bottom)
+    LinearLayout verticalLiveBottom;
+    @BindView(R.id.phone_live)
+    AutoRelativeLayout phoneLive;
+    @BindView(R.id.rl_quit)
+    RelativeLayout rlQuit;
 
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
@@ -114,6 +148,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
             }
         }
     };
+    private MyPopupWindow myPopupWindow;
 
 
     @Override
@@ -171,6 +206,22 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
 
     @Override
     protected void onEvent() {
+        //添加软键盘的监听
+        phoneLive.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right,
+                                       int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                int screenHeight = PhoneLiveVideoActivity.this.getWindowManager().getDefaultDisplay().getHeight();
+
+                if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > screenHeight / 3)) {
+                    verticalLiveBottom.setVisibility(View.GONE);
+                } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > screenHeight / 3)) {
+                    myPopupWindow.dismiss();
+                    open(rlQuit);
+                    verticalLiveBottom.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         //        添加手势监听
         addTouchListener();
 //        视频播放监听
@@ -375,6 +426,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
             mDanmuProcess.start();
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -429,10 +481,97 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         return false;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick({R.id.close_vertical_live, R.id.iv_input_word})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.close_vertical_live:
+                finish();
+                break;
+            case R.id.iv_input_word:
+                showPop();
+                close(rlQuit);
+                popupInputMethodWindow();
+                break;
+        }
     }
+
+    /**
+     * 显示弹幕输入框
+     */
+    private void showPop() {
+        myPopupWindow = new MyPopupWindow(this, R.layout.pop_input_msg);
+        View view = myPopupWindow.getView();
+        EditText editText = (EditText) view.findViewById(R.id.et_input_word);
+        myPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                myPopupWindow.showAtLocation(phoneLive, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+            }
+        }, 250);
+        Animation animation = rlQuit.getAnimation();
+
+
+    }
+
+    /**
+     * 打开软键盘
+     */
+    private void popupInputMethodWindow() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }, 0);
+    }
+
+    /**
+     * 打开--动画
+     *
+     * @param view
+     */
+    private void open(View view) {
+        view.setVisibility(View.VISIBLE);
+        ValueAnimator animator = createDropAnimator(view, 0, 200);
+        animator.start();
+    }
+
+    /**
+     * 关闭--动画
+     *
+     * @param view
+     */
+    private void close(final View view) {
+        int origheight = view.getHeight();
+        ValueAnimator animator = createDropAnimator(view, origheight, 0);
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.setVisibility(View.GONE);
+            }
+        });
+        animator.start();
+    }
+
+    private ValueAnimator createDropAnimator(final View view, int start, int end) {
+        ValueAnimator animator = ValueAnimator.ofInt(start, end);
+        animator.addUpdateListener(
+                new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        //   int value = (Integer)valueAnimator.getAnimatedValue();
+                        int value = (Integer) valueAnimator.getAnimatedValue();// 得到的值
+                        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+//                        layoutParams.height = Float.floatToIntBits(value);
+                        layoutParams.height = value;
+                        view.setLayoutParams(layoutParams);
+                    }
+                }
+        );
+        return animator;
+    }
+
 }
