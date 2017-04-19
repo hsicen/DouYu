@@ -17,7 +17,7 @@ import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.model.logic.home.bean.HomeColumnMoreAllList;
 import com.utouu.douyudemo.ui.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.utouu.douyudemo.utils.CalculationUtils;
-import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
+import com.utouu.douyudemo.view.common.activity.PcLivePortraitActivity;
 import com.utouu.douyudemo.view.common.activity.PhoneLiveVideoActivity;
 import com.utouu.douyudemo.view.live.activity.WebViewActivity;
 
@@ -85,27 +85,24 @@ public class HomeColumnMoreAllListAdapter extends BaseRecyclerAdapter<RecyclerVi
         if (mLiveList.get(position).getCate_id() == 201) {
             holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //  颜值栏目 竖屏播放
-                if (mLiveList.get(position).getCate_id() == 201) {
-                    Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id", mLiveList.get(position).getRoom_id());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                } else if (mLiveList.get(position).getCate_id() == 207) {
-                    Intent intent = new Intent(context, WebViewActivity.class);
-                    intent.putExtra("web_url", mLiveList.get(position).getJumpUrl()+"?from=dy");
-                    context.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, PcLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id", mLiveList.get(position).getRoom_id());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                }
+        holder.itemView.setOnClickListener(view -> {
+            //  颜值栏目 竖屏播放
+            if (mLiveList.get(position).getCate_id() == 201) {
+                Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Room_id", mLiveList.get(position).getRoom_id());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            } else if (mLiveList.get(position).getCate_id() == 207) {
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("web_url", mLiveList.get(position).getJumpUrl()+"?from=dy");
+                context.startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, PcLivePortraitActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Room_id", mLiveList.get(position).getRoom_id());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

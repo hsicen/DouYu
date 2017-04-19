@@ -26,7 +26,7 @@ import com.utouu.douyudemo.presenter.home.interfaces.HomeRecommendContract;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
 import com.utouu.douyudemo.utils.ToastUtils;
 import com.utouu.douyudemo.view.LoadDataView;
-import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
+import com.utouu.douyudemo.view.common.activity.PcLivePortraitActivity;
 import com.utouu.douyudemo.view.home.adapter.HomeCarouselAdapter;
 import com.utouu.douyudemo.view.home.adapter.HomeRecommendAdapter;
 
@@ -211,7 +211,7 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
 
     @Override
     public void onBannerItemClick(BGABanner banner, SimpleDraweeView itemView, String model, int position) {
-        Intent intent = new Intent(getActivity(), PcLiveVideoActivity.class);
+        Intent intent = new Intent(getActivity(), PcLivePortraitActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("Room_id",mHomeCarousel.get(position).getRoom().getRoom_id());
         intent.putExtras(bundle);

@@ -17,7 +17,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.utils.CalculationUtils;
-import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
+import com.utouu.douyudemo.view.common.activity.PcLivePortraitActivity;
 import com.utouu.douyudemo.view.common.activity.PhoneLiveVideoActivity;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<Recycler
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }else {
-                    Intent intent = new Intent(context, PcLiveVideoActivity.class);
+                    Intent intent = new Intent(context, PcLivePortraitActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("Room_id", mRommListEntity.get(position).getRoom_id());
                     intent.putExtras(bundle);

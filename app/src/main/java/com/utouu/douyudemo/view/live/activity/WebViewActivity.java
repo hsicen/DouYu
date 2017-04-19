@@ -26,11 +26,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by renxl on 2016/11/24.
- * <p>
- * // TODO: 2016/11/26  跳转 WebViewActivity 界面的时候不要让其他人 关心需要怎么传参数，只需要 传入参数即可。写一个 PageCtrl 的类来做 所有 Activity 的跳转。试试做做
- * <p>
- * email: renxuelongvip@163.com
+ * Create by 黄思程 on 2017/4/19  13:58
+ * Function：视频的Web播放页面
+ * Desc：跳转 WebViewActivity 界面的时候不要让其他人 关心需要怎么传参数，只需要 传入参数即可。
+ *       写一个 PageCtrl 的类来做 所有 Activity 的跳转
  */
 public class WebViewActivity extends SwipeBackActivity {
 

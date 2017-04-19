@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 
 import com.utouu.douyudemo.danmu.client.DyBulletScreenClient;
@@ -135,23 +133,16 @@ public class DanmuProcess {
     }
 
     private void getAndAddDanmu() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int groupId = -9999;
-                mDanmuClient = DyBulletScreenClient.getInstance();
-                //设置需要连接和访问的房间ID，以及弹幕池分组号
-                mDanmuClient.start(mRoomId, groupId);
+        Thread thread = new Thread(() -> {
+            int groupId = -9999;
+            mDanmuClient = DyBulletScreenClient.getInstance();
+            //设置需要连接和访问的房间ID，以及弹幕池分组号
+            mDanmuClient.start(mRoomId, groupId);
 
-                mDanmuClient.setmHandleMsgListener(new DyBulletScreenClient.HandleMsgListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void handleMessage(String txt) {
+            mDanmuClient.setmHandleMsgListener(txt -> {
 //                        发送弹幕
-                        addDanmaku(true, txt);
-                    }
-                });
-            }
+                addDanmaku(true, txt);
+            });
         });
         thread.start();
     }

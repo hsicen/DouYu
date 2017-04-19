@@ -9,6 +9,7 @@
         android:id="@+id/control_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh45.0dimens45.0dp"
+        android:visibility="invisible"
         android:background="@color/control_bar_bg">
 
         <ImageView
@@ -85,6 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh45.0dimens45.0dp"
         android:layout_gravity="bottom"
+        android:visibility="invisible"
         android:background="@color/control_bar_bg">
 
         <ImageView
@@ -247,47 +249,10 @@
 
             </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/live_room_gift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/dp_10"
-                android:src="@drawable/gift_pressed" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/live_room_gift"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_22"
-                android:src="@drawable/icon_shopping_entry_normal" />
-
-            <ImageView
-                android:id="@+id/live_room_lock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/pad_play_unlock" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/live_room_lock"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_22"
-                android:src="@drawable/online_clock" />
-
         </RelativeLayout>
 
     </FrameLayout>
+
     <!--中部控制 亮度 声音-->
     <RelativeLayout
         android:id="@+id/control_center"
@@ -329,6 +294,55 @@
             android:text="12%"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/live_room_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:layout_marginBottom="@dimen/dp_40">
+
+        <ImageView
+            android:id="@+id/live_room_gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@drawable/gift_pressed" />
+
+        <ImageView
+            android:id="@+id/live_room_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/live_room_gift"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_22"
+            android:src="@drawable/icon_shopping_entry_normal" />
+
+        <ImageView
+            android:id="@+id/live_room_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:src="@drawable/pad_play_unlock" />
+
+        <ImageView
+            android:id="@+id/live_room_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/live_room_lock"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_22"
+            android:src="@drawable/online_clock" />
+
     </RelativeLayout>
 
 </FrameLayout>

@@ -8,17 +8,19 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/roomLive_videoLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/control_bar_bg"
         android:layout_weight="2">
 
         <io.vov.vitamio.widget.VideoView
-            android:id="@+id/video_pc_portrait"
+            android:id="@+id/roomLive_video"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/tv_pc_portrait"
+            android:id="@+id/roomLive_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -28,11 +30,11 @@
             android:textSize="14sp" />
 
         <com.utouu.douyudemo.ui.loadplay.LoadingView
-            android:id="@+id/load_pc_portrait"
+            android:id="@+id/roomLive_loadingView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@id/tv_pc_portrait"
+            android:layout_toLeftOf="@id/roomLive_progress"
             app:innerTriangleColor="@color/colorPrimary"
             app:innerTriangleRadius="6dp"
             app:isNeedBackground="false"
@@ -40,15 +42,28 @@
             app:outerCircleRadius="10dp" />
 
         <ImageView
-            android:id="@+id/iv_live_back"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
+            android:id="@+id/roomLive_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="@dimen/dp_6"
             android:layout_marginTop="6dp"
             android:src="@drawable/icon_back" />
 
         <TextView
-            android:id="@+id/live_room_id"
+            android:id="@+id/roomLive_roomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/roomLive_back"
+            android:gravity="center"
+            android:text="2134123"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/roomLive_roomId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -59,11 +74,11 @@
             android:textSize="@dimen/dp_9" />
 
         <TextView
-            android:id="@+id/live_room_time"
+            android:id="@+id/roomLive_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/live_room_id"
+            android:layout_below="@id/roomLive_roomId"
             android:layout_marginRight="@dimen/dp_6"
             android:layout_marginTop="@dimen/dp_2"
             android:text="2017.04.18"
@@ -71,39 +86,38 @@
             android:textSize="@dimen/dp_9" />
 
         <ImageView
-            android:id="@+id/live_room_report"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/live_room_time"
-            android:layout_marginRight="@dimen/dp_6"
-            android:layout_marginTop="@dimen/dp_4"
-            android:src="@drawable/icon_report_video_normal" />
+            android:id="@+id/roomLive_report"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="@dimen/dp_2"
+            android:src="@drawable/icon_report_video_normal"
+            android:layout_below="@+id/roomLive_back"
+            android:layout_alignEnd="@+id/roomLive_date" />
 
         <ImageView
-            android:id="@+id/live_room_effect"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
+            android:id="@+id/roomLive_effect"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/live_room_report"
+            android:layout_below="@id/roomLive_report"
             android:layout_marginRight="@dimen/dp_6"
-            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_10"
             android:src="@drawable/open_effect" />
 
         <ImageView
-            android:id="@+id/live_room_play"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
+            android:id="@+id/roomLive_play"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/live_room_effect"
+            android:layout_below="@id/roomLive_effect"
             android:layout_marginRight="@dimen/dp_6"
-            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_10"
             android:src="@drawable/play" />
 
         <ImageView
-            android:id="@+id/live_room_full"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
+            android:id="@+id/roomLive_fullEnter"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/dp_10"
@@ -111,6 +125,7 @@
             android:src="@drawable/full" />
 
         <LinearLayout
+            android:id="@+id/roomLive_roomInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -121,6 +136,7 @@
             android:padding="@dimen/dp_3">
 
             <TextView
+                android:id="@+id/roomLive_personCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="人气:165.5万"
@@ -128,6 +144,7 @@
                 android:textSize="@dimen/dp_9" />
 
             <TextView
+                android:id="@+id/roomLive_roomId1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_3"
@@ -137,11 +154,10 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <com.flyco.tablayout.SlidingTabLayout
-        android:id="@+id/tab_pc_portrait"
+        android:id="@+id/roomLive_roomPageHead"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:background="#ffffff"
@@ -152,27 +168,24 @@
         app:tl_indicator_style="NORMAL"
         app:tl_tab_space_equal="true"
         app:tl_textSelectColor="#ff7800"
+        app:tl_textUnselectColor="@color/black"
         app:tl_textsize="14sp" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_pc_portrait"
+        android:id="@+id/roomLive_roomPageContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0.5"
-        android:background="@color/base_line" />
-
     <LinearLayout
-        android:id="@+id/input_pc_portrait"
+        android:id="@+id/roomLive_inputLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.4"
         android:padding="@dimen/dp_5">
 
         <ImageView
+            android:id="@+id/roomLive_roomShare"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center"
@@ -188,15 +201,19 @@
             android:layout_weight="1">
 
             <EditText
+                android:id="@+id/roomLive_inputText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="@drawable/shape_input"
+                android:gravity="center|left"
                 android:hint="吐个槽呗"
                 android:paddingLeft="@dimen/dp_6"
                 android:textSize="@dimen/dp_13" />
 
             <ImageView
-                android:id="@+id/room_btn_send"
+                android:id="@+id/roomLive_sendMsg"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_alignParentRight="true"
@@ -211,12 +228,13 @@
                 android:layout_marginBottom="@dimen/dp_4"
                 android:layout_marginRight="@dimen/dp_6"
                 android:layout_marginTop="@dimen/dp_4"
-                android:layout_toLeftOf="@id/room_btn_send"
+                android:layout_toLeftOf="@id/roomLive_sendMsg"
                 android:background="@color/alertdialog_line" />
 
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/roomLive_charge"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center"
@@ -225,6 +243,7 @@
             android:src="@drawable/icon_recharge" />
 
         <ImageView
+            android:id="@+id/roomLive_shop"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center"
@@ -233,6 +252,7 @@
             android:src="@drawable/icon_shopping" />
 
         <ImageView
+            android:id="@+id/roomLive_gift"
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center"
@@ -241,5 +261,11 @@
             android:src="@drawable/icon_gift" />
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/roomLive_roomLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0.5"
+        android:background="@color/base_line" />
 
 </LinearLayout>

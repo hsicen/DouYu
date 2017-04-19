@@ -17,7 +17,7 @@ import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.model.logic.live.bean.LiveOtherList;
 import com.utouu.douyudemo.ui.refreshview.recyclerview.BaseRecyclerAdapter;
 import com.utouu.douyudemo.utils.CalculationUtils;
-import com.utouu.douyudemo.view.common.activity.PcLiveVideoActivity;
+import com.utouu.douyudemo.view.common.activity.PcLivePortraitActivity;
 import com.utouu.douyudemo.view.common.activity.PhoneLiveVideoActivity;
 
 import java.util.ArrayList;
@@ -92,7 +92,7 @@ public class LiveOtherColumnListAdapter extends BaseRecyclerAdapter<RecyclerView
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }else {
-                    Intent intent = new Intent(context, PcLiveVideoActivity.class);
+                    Intent intent = new Intent(context, PcLivePortraitActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("Room_id", mLiveList.get(position).getRoom_id());
                     intent.putExtras(bundle);
