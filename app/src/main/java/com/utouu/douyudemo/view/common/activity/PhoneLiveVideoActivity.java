@@ -248,13 +248,12 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                 int screenHeight = PhoneLiveVideoActivity.this.getWindowManager().getDefaultDisplay().getHeight();
 
                 if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > screenHeight / 3)) {
-                    verticalLiveBottom.setVisibility(View.GONE);
                 } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > screenHeight / 3)) {
                     myPopupWindow.dismiss();
                     tranYAnimation(rlQuit, false);
                     tranXAnimation(tvRank, false);
                     tranXAnimation(tvIdentity, false);
-                    verticalLiveBottom.setVisibility(View.VISIBLE);
+                    tranYBottomAnimation(verticalLiveBottom, false);
                 }
             }
         });
@@ -576,6 +575,20 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         animator.start();
     }
 
+    private void tranYBottomAnimation(final View view, boolean open) {
+        float curTranslationY = view.getTranslationY();
+        if (open) {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, 100f);
+            oldY = curTranslationY;
+            animator.setDuration(100);
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, oldY);
+            animator.setDuration(1000);
+        }
+
+        animator.start();
+    }
+
     @OnClick({R.id.rl_focus, R.id.iv_phone_input, R.id.iv_phone_msg, R.id.iv_phone_mic, R.id.iv_phone_purchase, R.id.iv_phone_gift, R.id.iv_phone_share, R.id.close_vertical_live, R.id.tv_vetrical_focus, R.id.tv_rank, R.id.tv_identity, R.id.roomLive_roomId, R.id.roomLive_date})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -590,6 +603,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                 tranXAnimation(tvRank, true);
                 tranXAnimation(tvIdentity, true);
                 tranYAnimation(rlQuit, true);
+                tranYBottomAnimation(verticalLiveBottom, true);
                 popupInputMethodWindow();
                 break;
             case R.id.iv_phone_msg:
