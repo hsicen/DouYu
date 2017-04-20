@@ -39,6 +39,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.presenter.common.impl.CommonPhoneLiveVideoPresenterImp;
 import com.utouu.douyudemo.presenter.common.interfaces.CommonPhoneLiveVideoContract;
 import com.utouu.douyudemo.ui.loadplay.LoadingView;
+import com.utouu.douyudemo.utils.ToastUtils;
 import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.MyPopupWindow;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -83,14 +84,46 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     ImageView closeVerticalLive;
     @BindView(R.id.vertical_live_chat)
     RecyclerView verticalLiveChat;
-    @BindView(R.id.iv_input_word)
-    ImageView ivInputWord;
     @BindView(R.id.vertical_live_bottom)
     LinearLayout verticalLiveBottom;
     @BindView(R.id.phone_live)
     AutoRelativeLayout phoneLive;
     @BindView(R.id.rl_quit)
     RelativeLayout rlQuit;
+    @BindView(R.id.tv_vetrical_icon)
+    ImageView tvVetricalIcon;
+    @BindView(R.id.tv_vetrical_nickname)
+    TextView tvVetricalNickname;
+    @BindView(R.id.tv_vetrical_focusnum)
+    TextView tvVetricalFocusnum;
+    @BindView(R.id.tv_vetrical_focus)
+    TextView tvVetricalFocus;
+    @BindView(R.id.tv_rank)
+    TextView tvRank;
+    @BindView(R.id.tv_identity)
+    TextView tvIdentity;
+    @BindView(R.id.tv_weekly_rank)
+    TextView tvWeeklyRank;
+    @BindView(R.id.tv_weekly_rank_bottom)
+    TextView tvWeeklyRankBottom;
+    @BindView(R.id.roomLive_roomId)
+    TextView roomLiveRoomId;
+    @BindView(R.id.roomLive_date)
+    TextView roomLiveDate;
+    @BindView(R.id.rl_focus)
+    RelativeLayout rlFocus;
+    @BindView(R.id.iv_phone_input)
+    ImageView ivPhoneInput;
+    @BindView(R.id.iv_phone_msg)
+    ImageView ivPhoneMsg;
+    @BindView(R.id.iv_phone_mic)
+    ImageView ivPhoneMic;
+    @BindView(R.id.iv_phone_purchase)
+    ImageView ivPhonePurchase;
+    @BindView(R.id.iv_phone_gift)
+    ImageView ivPhoneGift;
+    @BindView(R.id.iv_phone_share)
+    ImageView ivPhoneShare;
 
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
@@ -481,19 +514,6 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         return false;
     }
 
-    @OnClick({R.id.close_vertical_live, R.id.iv_input_word})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.close_vertical_live:
-                finish();
-                break;
-            case R.id.iv_input_word:
-                showPop();
-                close(rlQuit);
-                popupInputMethodWindow();
-                break;
-        }
-    }
 
     /**
      * 显示弹幕输入框
@@ -574,4 +594,46 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         return animator;
     }
 
+    @OnClick({R.id.rl_focus, R.id.iv_phone_input, R.id.iv_phone_msg, R.id.iv_phone_mic, R.id.iv_phone_purchase, R.id.iv_phone_gift, R.id.iv_phone_share, R.id.close_vertical_live, R.id.tv_vetrical_focus, R.id.tv_rank, R.id.tv_identity, R.id.roomLive_roomId, R.id.roomLive_date})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.close_vertical_live:
+                finish();
+                break;
+            case R.id.rl_focus:
+                ToastUtils.showShort(this, "开发中~~");
+                break;
+            case R.id.iv_phone_input:
+                showPop();
+                close(rlQuit);
+                popupInputMethodWindow();
+                break;
+            case R.id.iv_phone_msg:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_mic:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_purchase:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_gift:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_share:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_vetrical_focus:
+                tvVetricalFocus.setVisibility(View.GONE);
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_rank:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_identity:
+                ToastUtils.showShort(this, "开发中");
+                break;
+        }
+    }
 }
+
