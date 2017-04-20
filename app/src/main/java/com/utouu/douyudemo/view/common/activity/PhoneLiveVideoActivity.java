@@ -1,8 +1,6 @@
 package com.utouu.douyudemo.view.common.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
+import android.animation.ObjectAnimator;
 import android.app.Service;
 import android.content.Context;
 import android.media.AudioManager;
@@ -39,6 +37,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.presenter.common.impl.CommonPhoneLiveVideoPresenterImp;
 import com.utouu.douyudemo.presenter.common.interfaces.CommonPhoneLiveVideoContract;
 import com.utouu.douyudemo.ui.loadplay.LoadingView;
+import com.utouu.douyudemo.utils.ToastUtils;
 import com.utouu.douyudemo.view.LoadDataView;
 import com.utouu.douyudemo.view.MyPopupWindow;
 import com.zhy.autolayout.AutoRelativeLayout;
@@ -83,14 +82,46 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     ImageView closeVerticalLive;
     @BindView(R.id.vertical_live_chat)
     RecyclerView verticalLiveChat;
-    @BindView(R.id.iv_input_word)
-    ImageView ivInputWord;
     @BindView(R.id.vertical_live_bottom)
     LinearLayout verticalLiveBottom;
     @BindView(R.id.phone_live)
     AutoRelativeLayout phoneLive;
     @BindView(R.id.rl_quit)
     RelativeLayout rlQuit;
+    @BindView(R.id.tv_vetrical_icon)
+    ImageView tvVetricalIcon;
+    @BindView(R.id.tv_vetrical_nickname)
+    TextView tvVetricalNickname;
+    @BindView(R.id.tv_vetrical_focusnum)
+    TextView tvVetricalFocusnum;
+    @BindView(R.id.tv_vetrical_focus)
+    TextView tvVetricalFocus;
+    @BindView(R.id.tv_rank)
+    TextView tvRank;
+    @BindView(R.id.tv_identity)
+    TextView tvIdentity;
+    @BindView(R.id.tv_weekly_rank)
+    TextView tvWeeklyRank;
+    @BindView(R.id.tv_weekly_rank_bottom)
+    TextView tvWeeklyRankBottom;
+    @BindView(R.id.roomLive_roomId)
+    TextView roomLiveRoomId;
+    @BindView(R.id.roomLive_date)
+    TextView roomLiveDate;
+    @BindView(R.id.rl_focus)
+    RelativeLayout rlFocus;
+    @BindView(R.id.iv_phone_input)
+    ImageView ivPhoneInput;
+    @BindView(R.id.iv_phone_msg)
+    ImageView ivPhoneMsg;
+    @BindView(R.id.iv_phone_mic)
+    ImageView ivPhoneMic;
+    @BindView(R.id.iv_phone_purchase)
+    ImageView ivPhonePurchase;
+    @BindView(R.id.iv_phone_gift)
+    ImageView ivPhoneGift;
+    @BindView(R.id.iv_phone_share)
+    ImageView ivPhoneShare;
 
     private HomeRecommendHotCate.RoomListEntity mRoomEntity;
     private OldLiveVideoInfo videoInfo;
@@ -149,6 +180,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         }
     };
     private MyPopupWindow myPopupWindow;
+    private ObjectAnimator animator;
+    private float oldY;
+    private float oldX;
 
 
     @Override
@@ -217,7 +251,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                     verticalLiveBottom.setVisibility(View.GONE);
                 } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > screenHeight / 3)) {
                     myPopupWindow.dismiss();
-                    open(rlQuit);
+                    tranYAnimation(rlQuit, false);
+                    tranXAnimation(tvRank, false);
+                    tranXAnimation(tvIdentity, false);
                     verticalLiveBottom.setVisibility(View.VISIBLE);
                 }
             }
@@ -481,19 +517,6 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         return false;
     }
 
-    @OnClick({R.id.close_vertical_live, R.id.iv_input_word})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.close_vertical_live:
-                finish();
-                break;
-            case R.id.iv_input_word:
-                showPop();
-                close(rlQuit);
-                popupInputMethodWindow();
-                break;
-        }
-    }
 
     /**
      * 显示弹幕输入框
@@ -528,50 +551,73 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         }, 0);
     }
 
-    /**
-     * 打开--动画
-     *
-     * @param view
-     */
-    private void open(View view) {
-        view.setVisibility(View.VISIBLE);
-        ValueAnimator animator = createDropAnimator(view, 0, 200);
+
+    private void tranXAnimation(final View view, boolean open) {
+        float curTranslationX = view.getTranslationX();
+        if (open) {
+            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, -200f);
+            oldX = curTranslationX;
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, oldX);
+        }
+        animator.setDuration(1000);
         animator.start();
     }
 
-    /**
-     * 关闭--动画
-     *
-     * @param view
-     */
-    private void close(final View view) {
-        int origheight = view.getHeight();
-        ValueAnimator animator = createDropAnimator(view, origheight, 0);
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
-            }
-        });
+    private void tranYAnimation(final View view, boolean open) {
+        float curTranslationY = view.getTranslationY();
+        if (open) {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, -90f);
+            oldY = curTranslationY;
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, oldY);
+        }
+        animator.setDuration(1000);
         animator.start();
     }
 
-    private ValueAnimator createDropAnimator(final View view, int start, int end) {
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
-        animator.addUpdateListener(
-                new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        //   int value = (Integer)valueAnimator.getAnimatedValue();
-                        int value = (Integer) valueAnimator.getAnimatedValue();// 得到的值
-                        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-//                        layoutParams.height = Float.floatToIntBits(value);
-                        layoutParams.height = value;
-                        view.setLayoutParams(layoutParams);
-                    }
-                }
-        );
-        return animator;
+    @OnClick({R.id.rl_focus, R.id.iv_phone_input, R.id.iv_phone_msg, R.id.iv_phone_mic, R.id.iv_phone_purchase, R.id.iv_phone_gift, R.id.iv_phone_share, R.id.close_vertical_live, R.id.tv_vetrical_focus, R.id.tv_rank, R.id.tv_identity, R.id.roomLive_roomId, R.id.roomLive_date})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.close_vertical_live:
+                finish();
+                break;
+            case R.id.rl_focus:
+                ToastUtils.showShort(this, "开发中~~");
+                break;
+            case R.id.iv_phone_input:
+                showPop();
+                tranXAnimation(tvRank, true);
+                tranXAnimation(tvIdentity, true);
+                tranYAnimation(rlQuit, true);
+                popupInputMethodWindow();
+                break;
+            case R.id.iv_phone_msg:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_mic:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_purchase:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_gift:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.iv_phone_share:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_vetrical_focus:
+                tvVetricalFocus.setVisibility(View.GONE);
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_rank:
+                ToastUtils.showShort(this, "开发中");
+                break;
+            case R.id.tv_identity:
+                ToastUtils.showShort(this, "开发中");
+                break;
+        }
     }
-
 }
+
