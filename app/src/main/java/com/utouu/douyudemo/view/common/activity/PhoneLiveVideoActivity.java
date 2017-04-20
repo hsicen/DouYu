@@ -1,8 +1,6 @@
 package com.utouu.douyudemo.view.common.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
+import android.animation.ObjectAnimator;
 import android.app.Service;
 import android.content.Context;
 import android.media.AudioManager;
@@ -182,6 +180,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         }
     };
     private MyPopupWindow myPopupWindow;
+    private ObjectAnimator animator;
+    private float oldY;
+    private float oldX;
 
 
     @Override
@@ -250,7 +251,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                     verticalLiveBottom.setVisibility(View.GONE);
                 } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > screenHeight / 3)) {
                     myPopupWindow.dismiss();
-                    open(rlQuit);
+                    tranYAnimation(rlQuit, false);
+                    tranXAnimation(tvRank, false);
+                    tranXAnimation(tvIdentity, false);
                     verticalLiveBottom.setVisibility(View.VISIBLE);
                 }
             }
@@ -548,50 +551,29 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         }, 0);
     }
 
-    /**
-     * 打开--动画
-     *
-     * @param view
-     */
-    private void open(View view) {
-        view.setVisibility(View.VISIBLE);
-        ValueAnimator animator = createDropAnimator(view, 0, 200);
+
+    private void tranXAnimation(final View view, boolean open) {
+        float curTranslationX = view.getTranslationX();
+        if (open) {
+            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, -200f);
+            oldX = curTranslationX;
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, oldX);
+        }
+        animator.setDuration(1000);
         animator.start();
     }
 
-    /**
-     * 关闭--动画
-     *
-     * @param view
-     */
-    private void close(final View view) {
-        int origheight = view.getHeight();
-        ValueAnimator animator = createDropAnimator(view, origheight, 0);
-        animator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
-            }
-        });
+    private void tranYAnimation(final View view, boolean open) {
+        float curTranslationY = view.getTranslationY();
+        if (open) {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, -90f);
+            oldY = curTranslationY;
+        } else {
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, oldY);
+        }
+        animator.setDuration(1000);
         animator.start();
-    }
-
-    private ValueAnimator createDropAnimator(final View view, int start, int end) {
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
-        animator.addUpdateListener(
-                new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        //   int value = (Integer)valueAnimator.getAnimatedValue();
-                        int value = (Integer) valueAnimator.getAnimatedValue();// 得到的值
-                        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-//                        layoutParams.height = Float.floatToIntBits(value);
-                        layoutParams.height = value;
-                        view.setLayoutParams(layoutParams);
-                    }
-                }
-        );
-        return animator;
     }
 
     @OnClick({R.id.rl_focus, R.id.iv_phone_input, R.id.iv_phone_msg, R.id.iv_phone_mic, R.id.iv_phone_purchase, R.id.iv_phone_gift, R.id.iv_phone_share, R.id.close_vertical_live, R.id.tv_vetrical_focus, R.id.tv_rank, R.id.tv_identity, R.id.roomLive_roomId, R.id.roomLive_date})
@@ -605,7 +587,9 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                 break;
             case R.id.iv_phone_input:
                 showPop();
-                close(rlQuit);
+                tranXAnimation(tvRank, true);
+                tranXAnimation(tvIdentity, true);
+                tranYAnimation(rlQuit, true);
                 popupInputMethodWindow();
                 break;
             case R.id.iv_phone_msg:
