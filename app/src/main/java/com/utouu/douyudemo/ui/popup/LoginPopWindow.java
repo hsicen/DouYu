@@ -18,29 +18,22 @@ import com.utouu.douyudemo.utils.ToastUtils;
 import razerdp.basepopup.BasePopupWindow;
 
 /**
- * Create by 黄思程 on 2017/4/18  11:16 x
+ * Create by 黄思程 on 2017/4/18  11:16
  * Function：
  * Desc：登录对话框
  */
 public class LoginPopWindow extends BasePopupWindow implements View.OnClickListener{
 
-    private final ImageView btnClose;
-    private final TextView loginWeiXin;
-    private final TextView loginQQ;
-    private final TextView loginDouYu;
-    private final TextView loginWeiBo;
-    private final TextView regist;
-
     public LoginPopWindow(Activity context) {
         super(context);
-        btnClose = ((ImageView) findViewById(R.id.btn_close_popup));
-        loginWeiXin = ((TextView) findViewById(R.id.tv_login_wx));
-        loginQQ = ((TextView) findViewById(R.id.tv_login_qq));
-        loginDouYu = ((TextView) findViewById(R.id.tv_login_douyu));
-        loginWeiBo = ((TextView) findViewById(R.id.tv_login_wb));
-        regist = ((TextView) findViewById(R.id.tv_register));
+        ImageView btnClose = ((ImageView) findViewById(R.id.btn_close_popup));
+        TextView loginWeiXin = ((TextView) findViewById(R.id.tv_login_wx));
+        TextView loginQQ = ((TextView) findViewById(R.id.tv_login_qq));
+        TextView loginDouYu = ((TextView) findViewById(R.id.tv_login_douyu));
+        TextView loginWeiBo = ((TextView) findViewById(R.id.tv_login_wb));
+        TextView regist = ((TextView) findViewById(R.id.tv_register));
 
-        setViewClickListener(this,btnClose,loginWeiXin,loginQQ,loginDouYu,loginWeiBo,regist);
+        setViewClickListener(this, btnClose, loginWeiXin, loginQQ, loginDouYu, loginWeiBo, regist);
     }
 
     @Override
