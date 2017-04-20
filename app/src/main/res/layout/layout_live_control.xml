@@ -170,6 +170,8 @@
                 android:imeOptions="actionSend|flagNoExtractUi"
                 android:maxLength="20"
                 android:padding="5.0dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:textColor="@color/black"
                 android:textColorHint="@color/base_line"
                 android:textSize="14sp" />

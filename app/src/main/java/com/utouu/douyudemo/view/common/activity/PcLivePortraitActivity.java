@@ -267,7 +267,7 @@ public class PcLivePortraitActivity extends BaseActivity<CommonPcLiveVideoModelL
 
 
     @OnClick({R.id.roomLive_videoLayout, R.id.roomLive_back, R.id.roomLive_report, R.id.roomLive_effect,
-            R.id.roomLive_play, R.id.roomLive_fullEnter, R.id.roomLive_roomShare,
+            R.id.roomLive_play, R.id.roomLive_fullEnter, R.id.roomLive_roomShare,R.id.roomLive_inputText,
             R.id.roomLive_sendMsg, R.id.roomLive_charge, R.id.roomLive_shop, R.id.roomLive_gift})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -275,7 +275,7 @@ public class PcLivePortraitActivity extends BaseActivity<CommonPcLiveVideoModelL
                 delayHideIcon(3000);
                 break;
             case R.id.roomLive_back:
-                finish();
+                onBackPressed();
                 break;
             case R.id.roomLive_report:
                 ToastUtils.showShort(this,"正在开发");
@@ -314,6 +314,11 @@ public class PcLivePortraitActivity extends BaseActivity<CommonPcLiveVideoModelL
             case R.id.roomLive_gift:
                 ToastUtils.showShort(this,"正在开发");
                 break;
+            case R.id.roomLive_inputText:
+                roomLiveInputText.requestFocus();
+                /*InputMethodManager methodManager = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
+                methodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);*/
+                break;
         }
     }
 
@@ -350,5 +355,10 @@ public class PcLivePortraitActivity extends BaseActivity<CommonPcLiveVideoModelL
         roomLiveRoomId.setVisibility(!isShow?View.VISIBLE:View.GONE);
         roomLiveLoadingView.setVisibility(View.INVISIBLE);
         roomLiveProgress.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

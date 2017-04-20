@@ -64,7 +64,7 @@ public class OtherHomeFragment extends BaseFragment<HomeCateModelLogic, HomeCate
 
     private HomeOtherAdapter adapter;
 
-    private static List<OtherHomeFragment> mOtherHomeFraments = new ArrayList<OtherHomeFragment>();
+    private static List<OtherHomeFragment> mOtherHomeFraments = new ArrayList<>();
 
     private HomeNgBarViewPagerAdapter homeNgBarViewPagerAdapter;
     private HomeNgBarAdapter homeNgBarAdapter;

@@ -206,6 +206,8 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/shape_input"
                 android:gravity="center|left"
                 android:hint="吐个槽呗"
