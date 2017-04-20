@@ -36,8 +36,8 @@ import butterknife.OnClick;
  * Function：
  * Desc：我的页面
  */
-public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> implements MeContract
-        .View {
+public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> implements
+        MeContract.View {
 
     @BindView(R.id.iv_avatar) SimpleDraweeView ivAvatar;
     @BindView(R.id.btn_login) Button btnLogin;
@@ -97,8 +97,9 @@ public  class UserFragment extends BaseFragment<MeModelLogic, MePresenterImpl> i
     protected void onInitView(Bundle bundle) {
         svProgressHUD = new SVProgressHUD(getActivity());
         mLoginPopwindow=new LoginPopWindow(getActivity());
-        ivAvatar.setImageResource(R.drawable.usercenter_default_avatar);
+        mLoginPopwindow.setDismissWhenTouchOuside(true);
 
+        ivAvatar.setImageResource(R.drawable.usercenter_default_avatar);
         mFloatButton.setClosedOnTouchOutside(true);
         createCustomAnimation();
     }

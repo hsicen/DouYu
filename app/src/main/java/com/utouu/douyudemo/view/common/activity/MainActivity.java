@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseView;
 import com.utouu.douyudemo.ui.NavigateTabBar;
-import com.utouu.douyudemo.ui.popup.LoginPopWindow;
 import com.utouu.douyudemo.view.follow.fragment.FollowFragment;
 import com.utouu.douyudemo.view.home.fragment.HomeFragment;
 import com.utouu.douyudemo.view.live.fragment.LiveFragment;
@@ -42,8 +41,6 @@ public class MainActivity extends AppCompatActivity implements BaseView,
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        new LoginPopWindow(MainActivity.this).showPopupWindow();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);

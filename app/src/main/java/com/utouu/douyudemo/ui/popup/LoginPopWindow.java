@@ -6,14 +6,15 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.utouu.douyudemo.R;
+import com.utouu.douyudemo.utils.ToastUtils;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import razerdp.basepopup.BasePopupWindow;
 
 /**
@@ -21,31 +22,36 @@ import razerdp.basepopup.BasePopupWindow;
  * Function：
  * Desc：登录对话框
  */
-public class LoginPopWindow extends BasePopupWindow {
+public class LoginPopWindow extends BasePopupWindow implements View.OnClickListener{
 
-    @BindView(R.id.tv_login_way)
-    TextView tvLoginWay;
-    @BindView(R.id.btn_close_popup)
-    ImageView btnClosePopup;
-    @BindView(R.id.tv_login_wx)
-    TextView tvLoginWx;
-    @BindView(R.id.tv_login_qq)
-    TextView tvLoginQq;
-    @BindView(R.id.tv_login_wb)
-    TextView tvLoginWb;
-    @BindView(R.id.tv_login_douyu)
-    TextView tvLoDouyu;
-    @BindView(R.id.tv_register)
-    TextView tvRegister;
+    private final ImageView btnClose;
+    private final TextView loginWeiXin;
+    private final TextView loginQQ;
+    private final TextView loginDouYu;
+    private final TextView loginWeiBo;
+    private final TextView regist;
 
     public LoginPopWindow(Activity context) {
         super(context);
-        Logger.e(">>>>>   登录对话框");
+        btnClose = ((ImageView) findViewById(R.id.btn_close_popup));
+        loginWeiXin = ((TextView) findViewById(R.id.tv_login_wx));
+        loginQQ = ((TextView) findViewById(R.id.tv_login_qq));
+        loginDouYu = ((TextView) findViewById(R.id.tv_login_douyu));
+        loginWeiBo = ((TextView) findViewById(R.id.tv_login_wb));
+        regist = ((TextView) findViewById(R.id.tv_register));
+
+        setViewClickListener(this,btnClose,loginWeiXin,loginQQ,loginDouYu,loginWeiBo,regist);
     }
 
     @Override
     protected Animation initShowAnimation() {
-        return null;
+        AnimationSet set=new AnimationSet(false);
+        Animation shakeAnima=new RotateAnimation(0,15,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        shakeAnima.setInterpolator(new CycleInterpolator(5));
+        shakeAnima.setDuration(400);
+        set.addAnimation(getDefaultAlphaAnimation());
+        set.addAnimation(shakeAnima);
+        return set;
     }
 
     @Override
@@ -59,7 +65,7 @@ public class LoginPopWindow extends BasePopupWindow {
 
     @Override
     public View getClickToDismissView() {
-        return btnClosePopup;
+        return getPopupWindowView();
     }
 
     @Override
@@ -72,9 +78,20 @@ public class LoginPopWindow extends BasePopupWindow {
         return null;
     }
 
-
-    @OnClick(R.id.btn_close_popup)
-    public void closePopup() {
-        this.dismiss();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_close_popup:
+                dismiss();
+                break;
+            case R.id.tv_login_wx:
+            case R.id.tv_login_qq:
+            case R.id.tv_login_douyu:
+            case R.id.tv_login_wb:
+            case R.id.tv_register:
+                ToastUtils.showShort(getContext(),"正在开发");
+                dismiss();
+                break;
+        }
     }
 }

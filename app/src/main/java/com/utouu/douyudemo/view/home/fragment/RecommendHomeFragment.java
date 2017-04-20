@@ -23,6 +23,7 @@ import com.utouu.douyudemo.model.logic.home.bean.HomeRecommendHotCate;
 import com.utouu.douyudemo.model.logic.home.bean.TabEntity;
 import com.utouu.douyudemo.presenter.home.impl.HomeRecommendPresenterImp;
 import com.utouu.douyudemo.presenter.home.interfaces.HomeRecommendContract;
+import com.utouu.douyudemo.ui.popup.LoginPopWindow;
 import com.utouu.douyudemo.ui.refreshview.XRefreshView;
 import com.utouu.douyudemo.utils.ToastUtils;
 import com.utouu.douyudemo.view.LoadDataView;
@@ -79,6 +80,10 @@ public class RecommendHomeFragment extends BaseFragment<HomeRecommendModelLogic,
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], bannerTabIcon[i], bannerTabIcon[i]));
         }
+
+        LoginPopWindow loginWindow = new LoginPopWindow(getActivity());
+        loginWindow.setDismissWhenTouchOuside(false);
+        loginWindow.showPopupWindow();
 
         svProgressHUD = new SVProgressHUD(getActivity());
         recommed_recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));

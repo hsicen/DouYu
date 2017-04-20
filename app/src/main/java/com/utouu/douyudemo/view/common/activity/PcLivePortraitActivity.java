@@ -316,8 +316,6 @@ public class PcLivePortraitActivity extends BaseActivity<CommonPcLiveVideoModelL
                 break;
             case R.id.roomLive_inputText:
                 roomLiveInputText.requestFocus();
-                /*InputMethodManager methodManager = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
-                methodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);*/
                 break;
         }
     }
