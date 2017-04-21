@@ -28,8 +28,9 @@ public class MyPopupWindow extends PopupWindow {
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setFocusable(true);
 //        this.setAnimationStyle(R.style.AppTheme);
-        ColorDrawable dw = new ColorDrawable(0xffffffff);
-        this.setBackgroundDrawable(dw);
+       /* ColorDrawable dw = new ColorDrawable(0xffffffff);
+        this.setBackgroundDrawable(dw);*/
+        setBackgroundDrawable(new ColorDrawable(0x99bebebe));
         setOutsideTouchable(true);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

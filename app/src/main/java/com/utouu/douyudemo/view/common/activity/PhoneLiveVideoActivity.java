@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.GestureDetector;
@@ -17,7 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.utouu.douyudemo.R;
 import com.utouu.douyudemo.base.BaseActivity;
 import com.utouu.douyudemo.base.BaseView;
@@ -183,6 +184,8 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     private ObjectAnimator animator;
     private float oldY;
     private float oldX;
+    private MyPopupWindow myPopup2Window;
+    private MyPopupWindow myNewsPopupWindow;
 
 
     @Override
@@ -249,11 +252,15 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
 
                 if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > screenHeight / 3)) {
                 } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > screenHeight / 3)) {
-                    myPopupWindow.dismiss();
-                    tranYAnimation(rlQuit, false);
-                    tranXAnimation(tvRank, false);
-                    tranXAnimation(tvIdentity, false);
-                    tranYBottomAnimation(verticalLiveBottom, false);
+                    if (myPopupWindow != null) {
+                        myPopupWindow.dismiss();
+                        tranYAnimation(rlQuit, false);
+                        tranXAnimation(tvRank, false);
+                        tranXAnimation(tvIdentity, false);
+                        verticalLiveBottom.setVisibility(View.VISIBLE);
+                        tranYBottomAnimation(verticalLiveBottom, false);
+                    }
+
                 }
             }
         });
@@ -532,8 +539,51 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                 myPopupWindow.showAtLocation(phoneLive, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
             }
         }, 250);
-        Animation animation = rlQuit.getAnimation();
+    }
 
+    /**
+     * 显示弹幕输入框
+     */
+    private void showMsgPop() {
+        myPopup2Window = new MyPopupWindow(this, R.layout.pop_show_msg);
+        View view = myPopup2Window.getView();
+        EditText editText = (EditText) view.findViewById(R.id.et_input_word);
+        WindowManager windowManager = getWindowManager();
+        int height = windowManager.getDefaultDisplay().getHeight();
+        myPopup2Window.setHeight(height * 2 / 3);
+        myPopup2Window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        myPopup2Window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        myPopup2Window.showAtLocation(phoneLive, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+
+    }
+
+    /**
+     * 显示弹幕输入框
+     */
+    private void showNewsPop() {
+        myNewsPopupWindow = new MyPopupWindow(this, R.layout.pop_show_news);
+        View view = myNewsPopupWindow.getView();
+
+        ImageView addImageView = (ImageView) view.findViewById(R.id.iv_add);
+        ViewPager newViewPager = (ViewPager) view.findViewById(R.id.live_news_viewpager);
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.live_news_tab);
+/*        String[] mTitle = new String[2];
+        mTitle[0] = "常用";
+        mTitle[1] = "全部";
+
+        newViewPager.setOffscreenPageLimit(mTitle.length);
+        VerticalLiveNewsAdapter mLiveAllColumnAdapter = new VerticalLiveNewsAdapter(getSupportFragmentManager(), mTitle);
+        newViewPager.setAdapter(mLiveAllColumnAdapter);
+        mLiveAllColumnAdapter.notifyDataSetChanged();
+        slidingTabLayout.setViewPager(newViewPager, mTitle);
+        slidingTabLayout.setCurrentTab(0);*/
+
+        WindowManager windowManager = getWindowManager();
+        int height = windowManager.getDefaultDisplay().getHeight();
+        myNewsPopupWindow.setHeight(height * 2 / 3);
+        myNewsPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        myNewsPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        myNewsPopupWindow.showAtLocation(phoneLive, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 
     }
 
@@ -554,7 +604,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     private void tranXAnimation(final View view, boolean open) {
         float curTranslationX = view.getTranslationX();
         if (open) {
-            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, -200f);
+            animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, -300f);
             oldX = curTranslationX;
         } else {
             animator = ObjectAnimator.ofFloat(view, "translationX", curTranslationX, oldX);
@@ -566,7 +616,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
     private void tranYAnimation(final View view, boolean open) {
         float curTranslationY = view.getTranslationY();
         if (open) {
-            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, -90f);
+            animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, -120f);
             oldY = curTranslationY;
         } else {
             animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, oldY);
@@ -580,7 +630,7 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
         if (open) {
             animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, 100f);
             oldY = curTranslationY;
-            animator.setDuration(100);
+            animator.setDuration(1);
         } else {
             animator = ObjectAnimator.ofFloat(view, "translationY", curTranslationY, oldY);
             animator.setDuration(1000);
@@ -599,27 +649,33 @@ public class PhoneLiveVideoActivity extends BaseActivity<CommonPhoneLiveVideoMod
                 ToastUtils.showShort(this, "开发中~~");
                 break;
             case R.id.iv_phone_input:
-                showPop();
+                verticalLiveBottom.setVisibility(View.GONE);
+                tranYBottomAnimation(verticalLiveBottom, true);
                 tranXAnimation(tvRank, true);
                 tranXAnimation(tvIdentity, true);
                 tranYAnimation(rlQuit, true);
-                tranYBottomAnimation(verticalLiveBottom, true);
+//                verticalLiveBottom.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+                        showPop();
+//                    }
+//                }, 200);
                 popupInputMethodWindow();
                 break;
             case R.id.iv_phone_msg:
-                ToastUtils.showShort(this, "开发中");
+                showNewsPop();
                 break;
             case R.id.iv_phone_mic:
-                ToastUtils.showShort(this, "开发中");
+                showMsgPop();
                 break;
             case R.id.iv_phone_purchase:
-                ToastUtils.showShort(this, "开发中");
+                showMsgPop();
                 break;
             case R.id.iv_phone_gift:
-                ToastUtils.showShort(this, "开发中");
+                showMsgPop();
                 break;
             case R.id.iv_phone_share:
-                ToastUtils.showShort(this, "开发中");
+                showMsgPop();
                 break;
             case R.id.tv_vetrical_focus:
                 tvVetricalFocus.setVisibility(View.GONE);
