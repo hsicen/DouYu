@@ -12,16 +12,13 @@ import com.utouu.douyudemo.ui.pagestatemanager.PageManager;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
 
-
 /**
- * Author： yolanda
- * <p>
- * CreateTime： 2016/12/7 0007 下午 2:11
- * <p>
- * description：
+ * 作者： poeticAndroid
+ * 邮箱： codinghuang@163.com
+ * 时间： 2017/4/29 15:23
+ * 作用：全局Application
+ * 描述：初始化全局变量,框架初始化配置
  */
-
-
 public class DYApplication extends Application {
     private static Context context;
 

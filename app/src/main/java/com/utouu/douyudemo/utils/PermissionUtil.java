@@ -9,10 +9,12 @@ import com.utouu.douyudemo.base.BaseView;
 import com.trello.rxlifecycle.LifecycleTransformer;
 
 /**
- * Created by Long
- * on 2016/12/8.
+ * 作者： poeticAndroid
+ * 邮箱： codinghuang@163.com
+ * 时间： 2017/4/30 15:53
+ * 作用：权限申请工具类
+ * 描述：权限申请工具类
  */
-
 public class PermissionUtil {
 
 
